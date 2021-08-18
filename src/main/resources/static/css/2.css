@@ -1,0 +1,101 @@
+<style>
+
+#header {
+}
+
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:1200px;
+    width:150px;
+    float:left;
+    padding:5px; 
+}
+#section {
+    width:500px;
+    float:left;
+    padding:10px; 
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+}
+h3 {
+    padding: 0;
+    margin: 0;
+    font-size:15px;
+}
+table{
+border-collapse: collapse;
+border-color:#eeeeee;
+position:absolute;
+}
+
+#table1{
+position: absolute;
+top:200px;
+left:260px;
+height:100px;
+}
+#table2{
+position: absolute;
+top:900px;
+left:260px;
+}
+table,td{
+border:1px,solid,black;
+ padding:20px 17px;
+}
+th{
+border:1px,solid,black;
+ padding:10px 17px;
+}
+td1{
+border:1px,solid,black;
+}
+
+#page2{
+position:absolute;
+top:1170px;
+left:260px;
+text-align:center;
+}
+#page2 a,page2 span{
+margin-right:12px;
+}
+#page2 .num{
+display:inline-block;
+color:#333333;
+text-decoration:none;
+width:32px;
+height:32px;
+text-align:center;
+line-height:32px;
+}
+#page2 .num:hover
+{
+background:#708090;
+border-radius:100%;
+}
+#page2 .home{
+color:#778899;
+cursor:text;
+}
+#page2 .prev{
+color:#000000;
+cursor:text;
+display:inline-block;
+}
+#page2 .last{
+color:#778899;
+cursor:text;
+}
+#page2 .next{
+color:#000000;
+cursor:text;
+display:inline-block;
+}
+</style>

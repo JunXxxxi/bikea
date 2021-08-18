@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>共享单车数据可视化分析系统</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link th:href="@{/js/morris/morris-0.4.3.min.css}" rel="stylesheet" />
+
+
+    <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/layui.css}" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+</head>
+
+<body>
+
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+        <div class="sidebar-collapse">
+            <ul class="nav">
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 单车信息<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="index.html">单车概况</a>
+                        </li>
+                        <li>
+                            <a href="table.html">单车分布</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 单车调度分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="form.html">高峰期分析</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="newold.html">用户概况</a>
+                        </li>
+                        <li>
+                            <a href="personas.html">用户画像</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="order2.html">订单详情</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+            </ul>
+
+        </div>
+
+    </nav>
+</div>
+
+<!-- /. NAV SIDE  -->
+<div id="page-wrapper">
+    <div id="page-inner">
+
+
+        <div class="row">
+            <div class="col-md-15">
+                <h1 class="page-header">
+                    Bike Information <small>Summary of  bikes</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li class="active">Data</li>
+                </ol>
+            </div>
+        </div>
+
+
+
+
+                    <!-- /. ROW  -->
+
+                     <hr />
+                                    <div class="row">
+                                    <div class="col-md-3 col-sm-6 col-xs-6">
+                                <div class="panel panel-back noti-box">
+
+                                    <div class="text-box" >
+                                        <span class="icon-box-right set-icon " style="margin-top: 0px;">
+                                                 <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+                                        </span>
+                                        <p class="main-text" style="margin-top: 15px;" th:text="${total}"></p>
+                                        <p class="text-muted" style="margin-top: 20px;">单车总数</p>
+                                    </div>
+                                 </div>
+                                 </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-6">
+                                <div class="panel panel-back noti-box">
+
+                                    <div class="text-box" >
+                                        <span class="icon-box-right  " style="margin-top: 0px;">
+                                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                        </span>
+                                        <p class="main-text" style="margin-top: 15px;" th:text="${normal}"></p>
+                                        <p class="text-muted" style="margin-top: 20px;">正常单车数</p>
+                                    </div>
+                                 </div>
+                                 </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-6">
+                                <div class="panel panel-back noti-box">
+
+                                    <div class="text-box" >
+                                        <span class="icon-box-right  " style="margin-top: 0px;">
+                                                           <i class="fa fa-chain-broken" ></i>
+                                        </span>
+                                        <p class="main-text" style="margin-top: 15px;" th:text="${broken}"></p>
+                                        <p class="text-muted" style="margin-top: 20px;">故障单车数</p>
+                                    </div>
+                                 </div>
+                                 </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-6">
+                                <div class="panel panel-back noti-box">
+
+                                    <div class="text-box" >
+                                        <span class="icon-box-right  " style="margin-top: 0px;">
+                                                      <i class="fa fa-bars" aria-hidden="true"></i>
+                                        </span>
+                                        <p class="main-text"style="margin-top: 15px;" th:text="${miss}"></p>
+                                        <p class="text-muted" style="margin-top: 20px;">丢失单车数</p>
+                                    </div>
+                                 </div>
+                                 </div>
+                                </div>
+                                     <!-- /. ROW  -->
+                    <hr />
+                                <div class="row">
+                                    <div class="layui-tab layui-tab-card">
+                                        <ul class="layui-tab-title">
+                                            <li class="layui-this">单车状况趋势</li>
+                                            <li>单车使用趋势</li>
+                                        </ul>
+
+                                        <div class="layui-tab-content" style="background-color: #FFFFFF;">
+                                            <div class="layui-tab-item layui-show" >
+                                                <!-- <div class="panel-heading">
+                                                     浏览量
+                                                 </div>-->
+                                                <div class="panel-body">
+                                                    <div id="tu1" style="width: 100%;height: 500px;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-tab-item" >
+                                                <div class="panel-body">
+                                                    <div id="tu3" style="width: 100%;height: 500px;"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                    <footer><p>Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://guantaow.taobao.com/"></a></p>
+
+
+                    </footer>
+                </div>
+                <!-- /. PAGE INNER  -->
+            </div>
+            <!-- /. PAGE WRAPPER  -->
+        </div>
+        <!-- /. WRAPPER  -->
+        <!-- JS Scripts-->
+        <!-- jQuery Js -->
+        <script th:src="@{/js/jquery-1.10.2.js}"></script>
+        <!-- Bootstrap Js -->
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/layui.all.js}"></script>
+        <!-- Metis Menu Js -->
+        <script th:src="@{/js/jquery.metisMenu.js}"></script>
+        <!-- Morris Chart Js -->
+        <script th:src="@{/js/morris/raphael-2.1.0.min.js}"></script>
+        <script th:src="@{/js/morris/morris.js}"></script>
+
+
+        <script th:src="@{/js/easypiechart.js}"></script>
+        <script th:src="@{/js/easypiechart-data.js}"></script>
+        <script th:src="@{/js/Lightweight-Chart/jquery.chart.js}"></script>
+        <!-- Custom Js -->
+        <script th:src="@{/js/custom-scripts.js}"></script>
+        <script th:src="@{/js/echarts.js}"></script>
+<!--        <input type="hidden" th:value="${date}" id="date"/>-->
+<!--        <input type="hidden" th:value="${hisB}" id="broken"/>-->
+<!--        <input type="hidden" th:value="${hisM}" id="miss"/>-->
+<!--        <input type="hidden" th:value="${hisN}" id="normal"/>-->
+
+        <script type="text/javascript">
+
+            // var dateList=[[${date}]];
+            var brokenList=[[${hisB}]];
+            var missList=[[${hisM}]];
+            var normalList=[[${hisN}]];
+            var option = {
+                title: {
+                    text: '单车状况趋势图'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['正常单车', '故障单车', '丢失单车']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['2020-1-1','2020-1-2','2020-1-3','2020-1-4','2020-1-5','2020-1-6','2020-1-7']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '正常单车',
+                        type: 'line',
+                        smooth:true,
+                        itemStyle : {
+
+                            normal : {
+                                color:'#000000',
+
+                                lineStyle:{
+                                    color:'#32CEE4'
+                                }
+                            }
+                        },
+
+                        data: normalList
+                    },
+                    {
+                        name: '故障单车',
+                        type: 'line',
+                        smooth:true,
+                        data: brokenList
+                    },
+                    {
+                        name: '丢失单车',
+                        type: 'line',
+                        smooth:true,
+                        data: missList
+                    },
+                ]
+            };
+
+
+            var myChart = echarts.init(document.getElementById('tu1'));
+            myChart.setOption(option);
+
+
+
+        </script>
+
+<!--        <script th:inline="javascript" type="text/javascript">-->
+<!--            var options = myChart.getOption();-->
+<!--            each = ""-->
+<!--            $.getJSON("http://localhost:8000/app/v1/historys/?format=json&pid="+pid, function(data){-->
+<!--                for(var i=0;i<5;i++){-->
+<!--                    list[i]=data.objects[i].data.number;-->
+<!--                }-->
+<!--                options.series[0].data=list;-->
+<!--                myChart.setOption(options);-->
+<!--            });-->
+<!--        </script>-->
+
+        <script type="text/javascript">
+            var numUse = [[${numU}]];
+            var numNoUse = [[${numNU}]];
+
+            var option = {
+                title: {
+                    text: '单车使用趋势图'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['正在使用单车', '未使用单车']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00','18:00', '20:00', '22:00']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '正在使用单车',
+                        type: 'line',
+                        smooth:true,
+                        itemStyle : {
+
+                            normal : {
+                                color:'#000000',
+
+                                lineStyle:{
+                                    color:'#32CEE4'
+                                }
+                            }
+                        },
+
+                        data: numUse
+                    },
+                    {
+                        name: '未使用单车',
+                        type: 'line',
+                        smooth:true,
+                        data: numNoUse
+                    },
+
+                ]
+            };
+
+
+            var width = $("#tu1").width();
+            var height = $("#tu3").height();
+            $("#tu3").css("width", width).css("height", height);
+            var myChart = echarts.init(document.getElementById('tu3'));
+            myChart.setOption(option);
+
+
+
+        </script>
+
+    </body>
+
+</html>

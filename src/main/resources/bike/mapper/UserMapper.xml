@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.bikea.mapper.UserMapper">
+
+    <select id="queryNumMale" resultType="int">
+        select COUNT(*) from user_info where gender = 'male'
+    </select>
+
+    <select id="queryNumFemale" resultType="int">
+        select COUNT(*) from user_info where gender = 'female'
+    </select>
+
+    <select id="queryAge" parameterType="int" resultType="int">
+        select COUNT(*) from user_info where age >= ${age1} and age &lt;= ${age2}
+    </select>
+
+    <select id="queryNumRide" parameterType="int" resultType="int">
+        select COUNT(*) from user_info where ridepm >= ${r1} and ridepm &lt;= ${r2}
+    </select>
+
+    <select id="queryNumDist" parameterType="int" resultType="int">
+        select COUNT(*) from user_info where ridepd >= ${d1} and ridepd &lt; ${d2}
+    </select>
+
+    <select id="queryNumTime" parameterType="int" resultType="int">
+        select COUNT(*) from user_info where ridept >= ${t1} and ridept &lt; ${t2}
+    </select>
+
+</mapper>

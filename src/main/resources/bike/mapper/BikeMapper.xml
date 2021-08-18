@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.bikea.mapper.BikeMapper">
+
+    <select id="queryBikeList" resultType="Bike">
+        select * from bike_info limit 100
+    </select>
+
+    <select id="queryNormalBikeLocation" resultType="java.util.HashMap">
+        select location,coordinate,COUNT(*) as num from bike_info where status = 'normal' and isUsing = 0 group by location, coordinate
+    </select>
+
+    <select id="queryBrokenBikeLocation" resultType="java.util.HashMap">
+        select location,coordinate,COUNT(*) as num from bike_info where status = 'broken' and isUsing = 0 group by location, coordinate
+    </select>
+
+    <select id="queryNormalNow" resultType="int">
+        select COUNT(*) from bike_info where status = 'normal'
+    </select>
+
+    <select id="queryBrokenNow" resultType="int">
+        select COUNT(*) from bike_info where status = 'broken'
+    </select>
+
+    <select id="queryMissNow" resultType="int">
+        select COUNT(*) from bike_info where status = 'miss'
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select COUNT(*) from bike_info
+    </select>
+
+    <select id="queryUsing" resultType="int">
+        select COUNT(*) from bike_info where isUsing = 1
+    </select>
+
+    <select id="queryDate" resultType="string">
+        select date from date_record  limit 7
+    </select>
+
+    <select id="queryHistNormal" resultType="int">
+        select num_normal from date_record  limit 7
+    </select>
+
+    <select id="queryHistBroken" resultType="int">
+        select num_broken from date_record  limit 7
+    </select>
+
+    <select id="queryHistMiss" resultType="int">
+        select num_miss from date_record  limit 7
+    </select>
+
+    <select id="queryNumUse" parameterType="int" resultType="int">
+        select COUNT(*) from order_info  where time_to_sec(start_time) &gt; time_to_sec('${i}:00:00') and time_to_sec(start_time) &lt; time_to_sec('${i+2}:00:00')
+    </select>
+
+    <select id="countNormalByCo" parameterType="string" resultType="int">
+        select COUNT(*) from bike_info  where status = 'normal' and coordinate = #{s}
+    </select>
+
+    <select id="countBrokenByCo" parameterType="string" resultType="int">
+        select COUNT(*) from bike_info  where status = 'broken' and coordinate = #{s}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>共享单车数据可视化分析系统</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+    <link th:href="@{/css/box1.css}" rel="stylesheet" />
+    <link th:href="@{/css/tabs.css}" rel="stylesheet" />
+    <link th:href="@{/js/morris/morris-0.4.3.min.css}" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link th:href="@{/css/layui.css}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- TABLE STYLES-->
+    <link th:href="@{/js/dataTables/dataTables.bootstrap.css}" rel="stylesheet" />
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+        <div class="sidebar-collapse">
+            <ul class="nav">
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 单车信息<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="index.html">单车概况</a>
+                        </li>
+                        <li>
+                            <a href="table.html">单车分布</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 单车调度分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="form.html">高峰期分析</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="newold.html">用户概况</a>
+                        </li>
+                        <li>
+                            <a href="personas.html">用户画像</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="order2.html">订单详情</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <!-- /. NAV SIDE  -->
+
+
+
+    <div id="page-wrapper" >
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">
+                    Order Overview <small>Recorder</small>
+                </h1>
+            </div>
+        </div>
+        <div id="page-inner">
+
+
+            <div class="row">
+                <div class="layui-tab layui-tab-card">
+
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item">dsds</div>
+                        <div class="layui-tab-item layui-show">
+                            <div class="layui-tab layui-tab-card">
+                                <ul class="layui-tab-title">
+                                    <li>关键指标</li>
+                                    <li class="layui-this">订单量</li>
+                                    <li>收益</li>
+                                </ul>
+                                <div class="layui-tab-content"  style="background-color: #ffffff;">
+                                    <div class="layui-tab-item"></div>
+                                    <div class="layui-tab-item layui-show" >
+                                        <div style="width: 100%;height: 550px;" id="t9"></div>
+                                    </div>
+                                    <div class="layui-tab-item">
+                                        <div style="width: 1433px;height: 550px;" id="t10"></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="layui-tab-item">dsds</div>
+                        <div class="layui-tab-item">dsds</div>
+                        <div class="layui-tab-item">dsds</div>
+                        <div class="layui-tab-item">dsds</div>
+                        <div class="layui-tab-item">dsds</div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="margin-top: 25px;">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            订单列表
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                    <tr>
+                                        <th>订单号</th>
+                                        <th>订单日期</th>
+                                        <th>单车ID</th>
+                                        <th>用户ID</th>
+                                        <th>起点</th>
+                                        <th>起点坐标</th>
+                                        <th>行驶里程</th>
+                                        <th>开始时间</th>
+                                        <th>行驶时长</th>
+                                        <th>金额</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="order:${orderList}">
+                                        <td th:text="${order.getOrderID()}"></td>
+                                        <td th:text="${order.getDate()}"></td>
+                                        <td th:text="${order.getBikeID()}"></td>
+                                        <td th:text="${order.getUserID()}"></td>
+                                        <td th:text="${order.getStart_place()}"></td>
+                                        <td th:text="${order.getStart_place_coordinate()}"></td>
+                                        <td th:text="${order.getDistance()}"></td>
+                                        <td th:text="${order.getStart_time()}"></td>
+                                        <td th:text="${order.getUse_time()}"></td>
+                                        <td th:text="${order.getCost()}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+<!--            <div class="row">-->
+<!--                <div class="layui-tab layui-tab-card">-->
+
+
+<!--                    <div class="layui-tab-content">-->
+<!--                        <div class="layui-tab-item">dsds</div>-->
+<!--                        <div class="layui-tab-item layui-show">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-12">-->
+<!--                                    &lt;!&ndash; Advanced Tables &ndash;&gt;-->
+<!--                                    <div class="panel panel-default">-->
+<!--                                        <div class="panel-heading">-->
+<!--                                            订单列表-->
+<!--                                        </div>-->
+<!--                                        <div class="panel-body">-->
+<!--                                            <div class="table-responsive">-->
+<!--                                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">-->
+<!--                                                    <thead>-->
+<!--                                                    <tr>-->
+<!--                                                        <th>订单号</th>-->
+<!--                                                        <th>订单日期</th>-->
+<!--                                                        <th>单车ID</th>-->
+<!--                                                        <th>用户ID</th>-->
+<!--                                                        <th>起点</th>-->
+<!--                                                        <th>起点坐标</th>-->
+<!--                                                        <th>行驶里程</th>-->
+<!--                                                        <th>开始时间</th>-->
+<!--                                                        <th>行驶时长</th>-->
+<!--                                                        <th>金额</th>-->
+<!--                                                    </tr>-->
+<!--                                                    </thead>-->
+<!--                                                    <tbody>-->
+<!--                                                    <tr th:each="order:${orderList}">-->
+<!--                                                        <td th:text="${order.getOrderID()}"></td>-->
+<!--                                                        <td th:text="${order.getDate()}"></td>-->
+<!--                                                        <td th:text="${order.getBikeID()}"></td>-->
+<!--                                                        <td th:text="${order.getUserID()}"></td>-->
+<!--                                                        <td th:text="${order.getStartPlace()}"></td>-->
+<!--                                                        <td th:text="${order.getStartPlaceCoordinate()}"></td>-->
+<!--                                                        <td th:text="${order.getDistance()}"></td>-->
+<!--                                                        <td th:text="${order.getStartTime()}"></td>-->
+<!--                                                        <td th:text="${order.getUseTime()}"></td>-->
+<!--                                                        <td th:text="${order.getCost()}"></td>-->
+<!--                                                    </tr>-->
+<!--                                                    </tbody>-->
+<!--                                                </table>-->
+<!--                                            </div>-->
+
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash;End Advanced Tables &ndash;&gt;-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="layui-tab-item">dsds</div>-->
+<!--                        <div class="layui-tab-item">dsds</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+            <footer><p>Copyright &copy; 2016.Company name All rights reserved.</p>
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+    <!-- Bootstrap Js -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Metis Menu Js -->
+    <script th:src="@{/js/jquery.metisMenu.js}"></script>
+    <!-- DATA TABLE SCRIPTS -->
+    <script th:src="@{/js/dataTables/jquery.dataTables.js}"></script>
+    <script th:src="@{/js/dataTables/dataTables.bootstrap.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
+    <!-- Custom Js -->
+    <script th:src="@{/js/custom-scripts.js}"></script>
+    <!-- Morris Chart Js -->
+    <script th:src="@{/js/morris/raphael-2.1.0.min.js}"></script>
+    <script th:src="@{/js/morris/morris.js}"></script>
+
+
+    <script th:src="@{/js/easypiechart.js}"></script>
+    <script th:src="@{/js/easypiechart-data.js}"></script>
+    <script type="text/javascript" th:src="@{/js/layui.all.js}"></script>
+    <script th:src="@{/js/Lightweight-Chart/jquery.chart.js}"></script>
+    <script th:src="@{/js/echarts.js}"></script>
+    <script type="text/javascript">
+        var numOrder = [[${numO}]];
+        var option = {
+            title: {
+                text: '订单量曲线'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['订单量']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['2020-01-01', '2020-01-02', '2020-01-03', '2020-01-04', '2020-01-05', '2020-01-06',
+                    '2020-01-07','2020-01-08','2020-01-09','2020-01-10','2020-01-11','2020-01-12','2020-01-13','2020-01-14']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '订单量',
+                    type: 'line',
+                    smooth:true,
+                    data: numOrder
+                }
+            ]
+        };
+        var myChart = echarts.init(document.getElementById('t9'));
+        myChart.setOption(option);
+
+
+    </script>
+
+    <script type="text/javascript">
+        var income = [[${income}]];
+        var option = {
+            title: {
+                text: '收益曲线'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['收益']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['2020-01-01', '2020-01-02', '2020-01-03', '2020-01-04', '2020-01-05', '2020-01-06',
+                    '2020-01-07','2020-01-08','2020-01-09','2020-01-10','2020-01-11','2020-01-12','2020-01-13','2020-01-14']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '收益',
+                    type: 'line',
+                    smooth:true,
+                    data: income
+                }
+            ]
+        };
+        var width = $("#t9").width();
+        var height = $("#t10").height();
+        $("#t10").css("width", width).css("height", height);
+        var myChart = echarts.init(document.getElementById('t10'));
+        myChart.setOption(option);
+
+
+    </script>
+
+
+</div>
+</body>
+</html>
