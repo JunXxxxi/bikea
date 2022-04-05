@@ -55,7 +55,7 @@
             <div class="sidebar-collapse">
                 <ul class="nav" >
                     <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 单车信息<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="index.html">单车概况</a>
@@ -63,14 +63,11 @@
                             <li>
                                 <a href="table.html">单车分布</a>
                             </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 单车调度分析<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
                             <li>
                                 <a href="form.html">高峰期分析</a>
+                            </li>
+                            <li>
+                                <a href="analyseB1.html">单车数据分析</a>
                             </li>
                         </ul>
                     </li>
@@ -84,20 +81,34 @@
                             <li>
                                 <a href="personas.html">用户画像</a>
                             </li>
+                            <li>
+                                <a href="analyseU1.html">用户数据分析</a>
+                            </li>
                         </ul>
                     </li>
-                    
+
                     <li>
                         <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="order2.html">订单详情</a>
                             </li>
+
                         </ul>
                     </li>
-                    
 
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="response.html">用户反馈</a>
+                            </li>
+                            <li>
+                                <a href="warn.html">警示信息</a>
+                            </li>
 
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
@@ -106,6 +117,12 @@
     </div>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
+            <div class="row">
+                <div  style="float: right;margin-top:0">
+                    <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black">武汉</span></button>
+                    <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black"><span style="color: black">北京</span></span></button>
+                </div>
+            </div>
           
 			 <div class="row">
                     <div class="col-md-12">
@@ -145,13 +162,13 @@
                                                     <td style="padding-left: 20px"><span th:id="table11" style="font-size: 20px;">6:00am~8:00am</span><span th:id="table12" style="font-size: 20px;float: right;margin-right:15%">376辆</span></td>
                                                 </tr>
                                                 <tr style="border: grey solid 1px">
-                                                    <td style="padding-left: 20px;background-color: #c8c8c8"><span th:id="table21" style="font-size: 20px;">10:00am~12:00am</span><span th:id="table22" style="font-size: 20px;float: right;margin-right:15%">245辆</span></td>
+                                                    <td style="padding-left: 20px;background-color: #c8c8c8"><span th:id="table21" style="font-size: 20px;">10:00am~12:00pm</span><span th:id="table22" style="font-size: 20px;float: right;margin-right:15%">245辆</span></td>
                                                 </tr>
                                                 <tr style="border: grey solid 1px">
-                                                    <td style="padding-left: 20px"><span th:id="table31" style="font-size: 20px;">12:00am~14:00pm</span><span th:id="table32" style="font-size: 20px;float: right;margin-right:15%">259辆</span></td>
+                                                    <td style="padding-left: 20px"><span th:id="table31" style="font-size: 20px;">12:00pm~14:00pm</span><span th:id="table32" style="font-size: 20px;float: right;margin-right:15%">259辆</span></td>
                                                 </tr>
                                                 <tr style="border: grey solid 1px">
-                                                    <td style="padding-left: 20px;background-color: #c8c8c8"><span th:id="table41" style="font-size: 20px;">16:00am~18:00pm</span><span th:id="table42" style="font-size: 20px;float: right;margin-right:15%">222辆</span></td>
+                                                    <td style="padding-left: 20px;background-color: #c8c8c8"><span th:id="table41" style="font-size: 20px;">16:00pm~18:00pm</span><span th:id="table42" style="font-size: 20px;float: right;margin-right:15%">222辆</span></td>
                                                 </tr>
                                             </table>
 
@@ -789,7 +806,27 @@
              };
 
      </script>
-	 
+
+    <script type="text/javascript">
+        window.onload=function(){
+            document.getElementById("button1").style.background="#24c2ce";
+        }
+    </script>
+
+    <script type="text/javascript">
+        function change() {
+
+            document.getElementById("button1").style.background="#24c2ce";
+            document.getElementById("button2").style.background="#D3D3D3";
+
+        }
+
+        function change2() {
+            document.getElementById("button1").style.background="#D3D3D3";
+            document.getElementById("button2").style.background="#24c2ce";
+            window.location.href="form2.html";
+        }
+    </script>
 	 
    
 </body>

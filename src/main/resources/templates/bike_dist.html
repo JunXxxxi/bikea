@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>共享单车数据可视化分析系统</title>
+	<!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <style>
+        p{ margin:0 auto}
+        #page-inner{
+            min-height: 600px
+        }
+        #page-wrapper{
+            min-height: 600px
+        }
+    </style>
+</head>
+<body>
+	
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+            <div class="sidebar-collapse">
+                <ul class="nav" >
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="index.html">单车概况</a>
+                            </li>
+                            <li>
+                                <a href="bike_detail.html">单车详情</a>
+                            </li>
+                            <li>
+                                <a href="bike_dist.html">单车分布与高峰期分析</a>
+                            </li>
+                            <li>
+                                <a href="analyseB1.html">单车数据分析</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="newold.html">用户概况</a>
+                            </li>
+                            <li>
+                                <a href="personas.html">用户画像</a>
+                            </li>
+                            <li>
+                                <a href="analyseU1.html">用户数据分析</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="order2.html">订单详情</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="response.html">用户反馈</a>
+                            </li>
+                            <li>
+                                <a href="warn.html">警示信息</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+    </div>
+        <!-- /. NAV SIDE  -->
+        
+        <div id="page-wrapper" >
+            <div class="row">
+                <div  style="float: right;margin-top:0">
+                    <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black">武汉</span></button>
+                    <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black"><span style="color: black">北京</span></span></button>
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Bike Distribute & Peak Analysis <small>Accuracy & Summarization</small>
+                        </h1>
+                    </div>
+                </div>
+            <div id="page-inner">
+
+
+                    <!-- /. ROW  -->
+            <div class="row">
+                <div class="layui-tab layui-tab-card">
+
+                    <div class="layui-tab-content">
+                <div class="col-md-12">
+                        <div class="panel-body">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-heading" >
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"  style="text-decoration: none"> 单车分布 </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" style="height: auto;">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-7">                                      
+                                                    <div  id="t1" style="width: 100%;height: 400px;border: 2px solid #000000">
+                                                    </div>   
+                                                    <div id="tip" style="margin-top: -18px;margin-right: 8px">点击地图上的覆盖物试试</div>
+                                                </div>
+
+                                                
+                                                    
+                                                <div class="col-md-5">
+                                                    <div style="width: 100%;height: 440px" id="t5"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                 
+                                        </div>
+                                    </div>
+                                    
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-heading" >
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"  style="text-decoration: none"> 高峰期分析 </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" style="height: auto;">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-7">                                      
+                                                    <div  id="t2" style="width: 100%;height: 510px;border: 2px solid #000000">
+                                                    </div>                                                                              
+                                                </div>
+
+                                                <div class="col-md-5" style="height: 550px">
+                                                    <div style="height: 330px;width:85%;margin-left:10%">
+                                                     <div class="pricing-table-grid">
+                                                            <div class="plans_head">
+                                                                <h2 style="color: #ffffff">Site Reports </h2>
+                                                                <h4 th:id="title" class="m_4"><small class="m_2"></small>武汉大学附近<small  class="m_3"></small></h4>
+                                                                <p style="float: left;margin-left:50px">高峰时间段 </p>
+                                                                <p style="margin-left:20px">需求车辆数</p>
+                                                            </div>
+                                                            <ul>
+                                                                <li><span th:id="table11" style="margin-left:18%;float: left;">6:00am~8:00am </span><span th:id="table12" style="margin-left:60%">376辆</span>  </li>
+                                                                <li><span th:id="table21" style="margin-left:18%;float: left;">10:00am~12:00pm </span> <span th:id="table22" style="margin-left:60%">245辆</span></li>
+                                                                <li><span th:id="table31" style="margin-left:18%;float: left;">12:00pm~14:00pm </span><span th:id="table32" style="margin-left:60%">259辆</span> </li>
+                                                                <li><span th:id="table41" style="margin-left:18%;float: left;">16:00pm~18:00pm </span> <span th:id="table42" style="margin-left:60%">222辆</span></li>
+                                                            </ul>
+                                                            <!---->
+                                                           
+                                                        </div>
+                                                
+                                                    </div>
+                                                    <div id="t3" style="width: 100%;height: 200px;"  ></div>                                     
+                                                </div>
+	                                        </div>    
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                               
+
+
+                </div>
+
+
+            </div>
+                    <!-- /. ROW  -->
+
+                
+            </div>
+                 
+				<footer><p>Copyright &copy; 2020.Company name All rights reserved.</footer>
+					</div>
+			 <!-- /. PAGE INNER  -->
+            </div>
+            </div>
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+      <!-- Bootstrap Js -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Metis Menu Js -->
+    <script th:src="@{/js/jquery.metisMenu.js}"></script>
+      <!-- Custom Js -->
+    <script th:src="@{/js/custom-scripts.js}"></script>
+    <script th:src="@{/js/echarts.js}"></script>
+    <script th:src="@{/js/bmap.js}"></script>
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=7aef2bd5ae16f2aad3de37f388d0c49c"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+      <script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/underscore-min.js" ></script>
+      <script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/backbone-min.js" ></script>
+      <script type="text/javascript" src='https://a.amap.com/jsapi_demos/static/demo-center/js/prety-json.js'></script>
+       
+
+    <script type="text/javascript">
+             var map = new AMap.Map('t1', {
+                    resizeEnable: true, //是否监控地图容器尺寸变化
+                    zoom:12, //初始化地图层级
+                    center: [114.367576,30.501367] //初始化地图中心点
+                }); 
+            function logMapinfo(){
+                  map.getCity( function(info){
+                    var node = new PrettyJSON.view.Node({
+                        el: document.querySelector("#map-city"),
+                        data: info
+                    });
+                  });
+                }
+
+                logMapinfo();
+            
+                //绑定地图移动事件
+                map.on('moveend', logMapinfo);
+                var lnglats = [114.353503,30.526597, 114.360257,30.528439, 114.397169,30.50576, 114.402539,30.505277, 114.386124,30.473816,
+                    114.332737,30.507838, 114.326386,30.503475, 114.354109,30.475924, 114.410537,30.477059, 114.391363,30.453568, 114.329738,30.556129,
+                    114.392846,30.591334, 114.413675,30.547503, 114.294886,30.537154, 114.436335,30.418504];
+                var circles = [];
+
+                for (var i = 0; i < lnglats.length; i=i+2) {
+                    // 创建点实例
+                    var circle = new AMap.Circle({
+                        center: new AMap.LngLat(lnglats[i],lnglats[i+1]),
+                         radius: 1000, // 圆半径
+                            borderWeight: 3,
+                            strokeColor: "#FF33FF", 
+                            strokeOpacity: 1,
+                            strokeWeight: 6,
+                            strokeOpacity: 0.2,
+                            fillOpacity: 0.4,
+                            strokeStyle: 'dashed',
+                            strokeDasharray: [10, 10], 
+                            // 线样式还支持 'dashed'
+                            fillColor: 'red',
+                           
+                            zIndex: 50
+                            
+                    });
+                     circle.on('click', showInfoC);
+                     // circle.on('mouseover', showInfoOver);
+                     // circle.on('mouseout', showInfoOut);
+                     circles.push(circle);
+                }
+             circles[0].content=['114.353503,30.526597','街道口附近'];
+             circles[1].content=['114.360257,30.528439','武汉大学附近'];
+             circles[2].content=['114.397169,30.50576','光谷广场附近'];
+             circles[3].content=['114.402539,30.505277','光谷步行街附近'];
+             circles[4].content=['114.386124,30.473816','中南财大南湖校区附近'];
+             circles[5].content=['114.332737,30.507838','武汉理工大学南湖校区附近'];
+             circles[6].content=['114.326386,30.503475','佰港城附近'];
+             circles[7].content=['114.354109,30.475924','华中农业大学附近'];
+             circles[8].content=['114.410537,30.477059','光谷天地附近'];
+             circles[9].content=['114.391363,30.453568','华中师大一附中附近'];
+             circles[10].content=['114.329738,30.556129','湖北省图书馆附近'];
+             circles[11].content=['114.392846,30.591334','武汉欢乐谷附近'];
+             circles[12].content=['114.413675,30.547503','东湖磨山景区附近'];
+             circles[13].content=['114.294886,30.537154','武汉音乐学院附近'];
+             circles[14].content=['114.436335,30.418504','湖北经济学院附近'];
+
+                // 将点添加到地图
+                map.add(circles);
+                
+                    function showInfoC(event){
+                        var e = event || window.event;
+                        if (e.target.content[1] == '街道口附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:99' + '\n'+'当前故障单车数量:92'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 112, 114, 120, 101, 40, 48,41, 60, 65,41, 47, 70],
+                                ['故障单车', 66, 70, 70, 70, 98, 110,112, 151, 160,120, 99, 80],
+                            ];
+                        }
+                        else if(e.target.content[1] == '武汉大学附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:168' + '\n'+'当前故障单车数量:45'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 141, 130, 165, 153, 183, 148,141, 130, 165,141,130, 165],
+                                ['故障单车', 86, 92, 85, 83, 73, 55,71, 60, 40,40, 32, 42],
+                            ];
+                        }
+                        else if(e.target.content[1] == '光谷广场附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:21' + '\n'+'当前故障单车数量:42'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 40, 50, 55, 66, 190, 199,250, 220, 144,60, 55, 49],
+                                ['故障单车', 31, 33, 34, 45, 59, 70,55, 66, 40,44, 35, 32],
+                            ];
+                        }
+                        else if(e.target.content[1] == '光谷步行街附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:155' + '\n'+'当前故障单车数量:43'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 55, 57, 61, 50, 160, 210,222, 160, 99,110, 80, 101],
+                                ['故障单车', 58, 60, 50, 40, 51, 70,88, 90, 66,40, 55, 69],
+                            ];
+                        }
+                        else if(e.target.content[1] == '中南财大南湖校区附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:133' + '\n'+'当前故障单车数量:27'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 121, 123, 124, 139, 195, 170,144, 106, 99,55, 77, 90],
+                                ['故障单车', 23, 22, 22, 33, 34, 41,43, 66, 51,55, 32, 31],
+                            ];
+                        }
+                        else if(e.target.content[1] == '武汉理工大学南湖校区附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:33' + '\n'+'当前故障单车数量:65'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 90, 92, 94, 99, 220, 271,102, 33, 150,122, 80, 22],
+                                ['故障单车', 18, 18, 17, 21, 51, 71,70, 88, 50,55, 41, 30],
+                            ];
+                        }
+                        else if(e.target.content[1] == '佰港城附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:84' + '\n'+'当前故障单车数量:21'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 55, 51, 60, 61, 99, 116,150, 160, 141,70, 80, 61],
+                                ['故障单车', 22, 24, 25, 27, 31, 57,40, 66, 31,56, 44, 25],
+                            ];
+                        }
+                        else if(e.target.content[1] == '华中农业大学附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:266' + '\n'+'当前故障单车数量:44'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 155, 154, 156, 167, 222, 260,244, 210, 255,153, 120, 136],
+                                ['故障单车', 55, 44, 60, 51, 66, 68,77, 77, 77,61, 59, 61],
+                            ];
+                        }
+                        else if(e.target.content[1] == '光谷天地附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:69' + '\n'+'当前故障单车数量:23'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 41, 41, 43, 56, 150, 190,210, 222, 111,70, 80, 55],
+                                ['故障单车', 11, 11, 12, 16, 21, 33,38, 33, 22,19, 19, 15],
+                            ];
+                        }
+                        else if(e.target.content[1] == '华中师大一附中附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:133' + '\n'+'当前故障单车数量:15'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 144, 145, 145, 150, 190, 211,210, 158, 144,111, 123, 133],
+                                ['故障单车', 33, 33, 35, 36, 41, 33,38, 50, 51,52, 55, 59],
+                            ];
+                        }
+                        else if(e.target.content[1] == '湖北省图书馆附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:82' + '\n'+'当前故障单车数量:40'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 39, 33, 34, 39, 111, 155,245, 277, 310,222, 100, 55],
+                                ['故障单车', 21, 22, 25, 30, 33, 45,66, 77, 58,61, 31, 39],
+                            ];
+                        }
+                        else if(e.target.content[1] == '武汉欢乐谷附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:77' + '\n'+'当前故障单车数量:51'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 55, 59, 59, 67, 133, 190,210, 288, 210,216, 111, 67],
+                                ['故障单车', 17, 15, 15, 16, 44, 21,55, 55, 66,75, 78, 70],
+                            ];
+                        }
+                        else if(e.target.content[1] == '东湖磨山景区附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:158' + '\n'+'当前故障单车数量:103'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 111, 112, 112, 141, 156, 188,255, 222, 190,111, 74, 89],
+                                ['故障单车', 55, 55, 51, 66, 87, 111,88, 80, 90,99, 60, 77],
+                            ];
+                        }
+                        else if(e.target.content[1] == '武汉音乐学院附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:142' + '\n'+'当前故障单车数量:45'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 99, 103, 104, 111, 150, 166,222, 250, 290,210, 99, 89],
+                                ['故障单车', 41, 41, 33, 36, 55, 66,77, 75, 73,66, 51, 45],
+                            ];
+                        }
+                        else if(e.target.content[1] == '湖北经济学院附近'){
+                            var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:231' + '\n'+'当前故障单车数量:27'+'\n'
+                            document.querySelector("#tip").innerText = text;
+                            option.title.text = e.target.content[1];
+                            myChart = echarts.init(document.getElementById('t5'));
+                            option.dataset.source = [
+                                ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                    '18:00', '20:00', '22:00'],
+                                ['正常未使用单车', 133, 140, 133, 150, 211, 222,270, 333, 278,188, 111, 143],
+                                ['故障单车', 66, 66, 67, 70, 30, 33,38, 39, 40,44, 45, 55],
+                            ];
+                        }
+                        myChart.setOption(option);
+                     }
+                            
+                     
+                     // function showInfoOver(e){
+                     //     var text = '鼠标移入覆盖物！'
+                     //     document.querySelector("#tip").innerText = text;
+                     // }
+                     // function showInfoOut(e){
+                     //     var text = '鼠标移出覆盖物！'
+                     //     document.querySelector("#tip").innerText = text;
+                     // }
+
+                         map.onmousewheel=function (e) {
+                         e= e || window.event;
+                         if(document.all){ 
+                         e.cancelBubble=true;
+                         }else{ e.stopPropagation(); }
+                         };
+                         
+                         
+    </script>
+
+     <script type="text/javascript">
+             var map = new AMap.Map('t2', {
+                    resizeEnable: true, //是否监控地图容器尺寸变化
+                    zoom:12, //初始化地图层级
+                    center: [114.366718,30.512311] //初始化地图中心点
+                }); 
+            
+            
+                //绑定地图移动事件
+
+             var circle = new AMap.Circle({
+                 center: new AMap.LngLat(114.353503,30.526597),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle1 = new AMap.Circle({
+                 center: new AMap.LngLat(114.360257,30.528439),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle2 = new AMap.Circle({
+                 center: new AMap.LngLat(114.397169,30.50576),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle3 = new AMap.Circle({
+                 center: new AMap.LngLat(114.402539,30.505277),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle4 = new AMap.Circle({
+                 center: new AMap.LngLat(114.386124,30.473816),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle5 = new AMap.Circle({
+                 center: new AMap.LngLat(114.332737,30.507838),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle6 = new AMap.Circle({
+                 center: new AMap.LngLat(114.326386,30.503475),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle7 = new AMap.Circle({
+                 center: new AMap.LngLat(114.354109,30.475924),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle8 = new AMap.Circle({
+                 center: new AMap.LngLat(114.410537,30.477059),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle9 = new AMap.Circle({
+                 center: new AMap.LngLat(114.391363,30.453568),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle10 = new AMap.Circle({
+                 center: new AMap.LngLat(114.329738,30.556129),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle11 = new AMap.Circle({
+                 center: new AMap.LngLat(114.392846,30.591334),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle12 = new AMap.Circle({
+                 center: new AMap.LngLat(114.413675,30.547503),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle13 = new AMap.Circle({
+                 center: new AMap.LngLat(114.294886,30.537154),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             var circle14 = new AMap.Circle({
+                 center: new AMap.LngLat(114.436335,30.418504),  // 圆心位置
+                 radius: 1000, // 圆半径
+                 borderWeight: 3,
+                 strokeColor: "#FF33FF",
+                 strokeOpacity: 1,
+                 strokeWeight: 6,
+                 strokeOpacity: 0.2,
+                 fillOpacity: 0.4,
+                 strokeStyle: 'dashed',
+                 strokeDasharray: [10, 10],
+                 // 线样式还支持 'dashed'
+                 fillColor: 'red',
+                 zIndex: 50,
+
+             });
+
+             map.add(circle);
+             map.add(circle1);
+             map.add(circle2);
+             map.add(circle3);
+             map.add(circle4);
+             map.add(circle5);
+             map.add(circle6);
+             map.add(circle7);
+             map.add(circle8);
+             map.add(circle9);
+             map.add(circle10);
+             map.add(circle11);
+             map.add(circle12);
+             map.add(circle13);
+             map.add(circle14);
+             circle.content=['114.353503,30.526597','街道口附近'];
+             circle1.content=['114.360257,30.528439','武汉大学附近'];
+             circle2.content=['114.397169,30.50576','光谷广场附近'];
+             circle3.content=['114.402539,30.505277','光谷步行街附近'];
+             circle4.content=['114.386124,30.473816','中南财大附近'];
+             circle5.content=['114.332737,30.507838','武汉理工大学附近'];
+             circle6.content=['114.326386,30.503475','佰港城附近'];
+             circle7.content=['114.354109,30.475924','华中农业大学附近'];
+             circle8.content=['114.410537,30.477059','光谷天地附近'];
+             circle9.content=['114.391363,30.453568','华中师大一附中附近'];
+             circle10.content=['114.329738,30.556129','湖北省图书馆附近'];
+             circle11.content=['114.392846,30.591334','武汉欢乐谷附近'];
+             circle12.content=['114.413675,30.547503','东湖磨山景区附近'];
+             circle13.content=['114.294886,30.537154','武汉音乐学院附近'];
+             circle14.content=['114.436335,30.418504','湖北经济学院附近'];
+
+             function showInfoC(event){
+                 var e = event || window.event;
+                 var text1 = e.target.content[1];
+                 document.querySelector("#title").innerText = text1;
+                 myChart2 = echarts.init(document.getElementById('t3'));
+                 if (e.target.content[1] == '街道口附近'){
+                     option2.series[0].data = [40, 21, 6, 44, 266, 230, 266,310,333,207,290,99];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '226辆';
+                     document.querySelector("#table21").innerText = '14:00pm~16:00pm';
+                     document.querySelector("#table22").innerText = '333辆';
+                     document.querySelector("#table31").innerText = '18:00pm~20:00pm';
+                     document.querySelector("#table32").innerText = '290辆';
+                     document.querySelector("#table41").innerText = '';
+                     document.querySelector("#table42").innerText = '';
+                 }
+                 else if (e.target.content[1] == '武汉大学附近'){
+                     option2.series[0].data = [10, 4, 0, 1, 376, 150, 245,259,111,222,144,99];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '376辆';
+                     document.querySelector("#table21").innerText = '10:00am~12:00pm';
+                     document.querySelector("#table22").innerText = '245辆';
+                     document.querySelector("#table31").innerText = '12:00am~14:00pm';
+                     document.querySelector("#table32").innerText = '259辆';
+                     document.querySelector("#table41").innerText = '16:00am~18:00pm';
+                     document.querySelector("#table42").innerText = '222辆';
+                 }
+                 else if (e.target.content[1] == '光谷广场附近'){
+                     option2.series[0].data = [96, 21, 2, 5, 122, 189, 192,102,210,151,299,310];
+                     document.querySelector("#table11").innerText = '8:00am~10:00am';
+                     document.querySelector("#table12").innerText = '189辆';
+                     document.querySelector("#table21").innerText = '10:00am~12:00pm';
+                     document.querySelector("#table22").innerText = '192辆';
+                     document.querySelector("#table31").innerText = '14:00pm~16:00pm';
+                     document.querySelector("#table32").innerText = '210辆';
+                     document.querySelector("#table41").innerText = '18:00pm~22:00pm';
+                     document.querySelector("#table42").innerText = '609辆';
+                 }
+                 else if (e.target.content[1] == '光谷步行街附近'){
+                     option2.series[0].data = [88, 15, 0, 3, 197, 111, 188,215,143,151,333,141];
+                     document.querySelector("#table11").innerText = '8:00am~10:00am';
+                     document.querySelector("#table12").innerText = '197辆';
+                     document.querySelector("#table21").innerText = '12:00pm~14:00pm';
+                     document.querySelector("#table22").innerText = '188辆';
+                     document.querySelector("#table31").innerText = '14:00pm~16:00pm';
+                     document.querySelector("#table32").innerText = '215辆';
+                     document.querySelector("#table41").innerText = '18:00pm~20:00pm';
+                     document.querySelector("#table42").innerText = '333辆';
+                 }
+                 else if (e.target.content[1] == '中南财大附近'){
+                     option2.series[0].data = [13, 6, 0, 0, 219, 111, 99,199,111,222,152,64];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '219辆';
+                     document.querySelector("#table21").innerText = '12:00pm~14:00pm';
+                     document.querySelector("#table22").innerText = '199辆';
+                     document.querySelector("#table31").innerText = '16:00pm~18:00pm';
+                     document.querySelector("#table32").innerText = '222辆';
+                     document.querySelector("#table41").innerText = '';
+                     document.querySelector("#table42").innerText = '';
+                 }
+                 else if (e.target.content[1] == '武汉理工大学附近'){
+                     option2.series[0].data = [25, 6, 0, 0, 322, 123, 211,234,101,341,109,88];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '322辆';
+                     document.querySelector("#table21").innerText = '10:00am~12:00pm';
+                     document.querySelector("#table22").innerText = '211辆';
+                     document.querySelector("#table31").innerText = '12:00pm~14:00pm';
+                     document.querySelector("#table32").innerText = '234辆';
+                     document.querySelector("#table41").innerText = '16:00pm~18:00pm';
+                     document.querySelector("#table42").innerText = '341辆';
+                 }
+                 else if (e.target.content[1] == '佰港城附近'){
+                     option2.series[0].data = [56, 28, 14, 6, 86, 198, 121,111,97,101,216,77];
+                     document.querySelector("#table11").innerText = '8:00am~10:00am';
+                     document.querySelector("#table12").innerText = '322辆';
+                     document.querySelector("#table21").innerText = '18:00pm~20:00pm';
+                     document.querySelector("#table22").innerText = '216辆';
+                     document.querySelector("#table31").innerText = '';
+                     document.querySelector("#table32").innerText = '';
+                     document.querySelector("#table41").innerText = '';
+                     document.querySelector("#table42").innerText = '';
+                 }
+                 else if (e.target.content[1] == '华中农业大学附近'){
+                     option2.series[0].data = [24, 8, 0, 0, 256, 141, 133,194,89,211,121,93];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '256辆';
+                     document.querySelector("#table21").innerText = '12:00pm~14:00pm';
+                     document.querySelector("#table22").innerText = '194辆';
+                     document.querySelector("#table31").innerText = '16:00pm~18:00pm';
+                     document.querySelector("#table32").innerText = '211辆';
+                     document.querySelector("#table41").innerText = '';
+                     document.querySelector("#table42").innerText = '';
+                 }
+                 else if (e.target.content[1] == '光谷天地附近'){
+                     option2.series[0].data = [33, 32, 14, 6, 67, 39, 49,52,31,43,237,87];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '67辆';
+                     document.querySelector("#table21").innerText = '18:00pm~20:00pm';
+                     document.querySelector("#table22").innerText = '237辆';
+                     document.querySelector("#table31").innerText = '';
+                     document.querySelector("#table32").innerText = '';
+                     document.querySelector("#table41").innerText = '';
+                     document.querySelector("#table42").innerText = '';
+                 }
+                 else if (e.target.content[1] == '华中师大一附中附近'){
+                     option2.series[0].data = [0, 0, 0, 0, 298, 64, 99,244,78,321,104,56];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '298辆';
+                     document.querySelector("#table21").innerText = '12:00pm~14:00pm';
+                     document.querySelector("#table22").innerText = '244辆';
+                     document.querySelector("#table31").innerText = '16:00pm~18:00pm';
+                     document.querySelector("#table32").innerText = '321辆';
+                     document.querySelector("#table41").innerText = '';
+                     document.querySelector("#table42").innerText = '';
+                 }
+                 else if (e.target.content[1] == '湖北省图书馆附近'){
+                     option2.series[0].data = [44, 12, 8, 3, 149, 78, 158,97,67,205,191,76];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '149辆';
+                     document.querySelector("#table21").innerText = '10:00am~12:00pm';
+                     document.querySelector("#table22").innerText = '158辆';
+                     document.querySelector("#table31").innerText = '16:00pm~18:00pm';
+                     document.querySelector("#table32").innerText = '205辆';
+                     document.querySelector("#table41").innerText = '18:00pm~20:00pm';
+                     document.querySelector("#table42").innerText = '191辆';
+                 }
+                 else if (e.target.content[1] == '武汉欢乐谷附近'){
+                     option2.series[0].data = [151, 43, 12, 4, 55, 41, 147,97,67,211,106,198];
+                     document.querySelector("#table11").innerText = '10:00am~12:00pm';
+                     document.querySelector("#table12").innerText = '147辆';
+                     document.querySelector("#table21").innerText = '16:00pm~18:00pm';
+                     document.querySelector("#table22").innerText = '211辆';
+                     document.querySelector("#table31").innerText = '20:00pm~22:00pm';
+                     document.querySelector("#table32").innerText = '198辆';
+                     document.querySelector("#table41").innerText = '22:00pm~00:00am';
+                     document.querySelector("#table42").innerText = '151辆';
+                 }
+                 else if (e.target.content[1] == '东湖磨山景区附近'){
+                     option2.series[0].data = [19, 6, 0, 3, 66, 210, 197,78,152,66,52,29];
+                     document.querySelector("#table11").innerText = '8:00am~10:00am';
+                     document.querySelector("#table12").innerText = '210辆';
+                     document.querySelector("#table21").innerText = '10:00am~12:00pm';
+                     document.querySelector("#table22").innerText = '197辆';
+                     document.querySelector("#table31").innerText = '14:00pm~16:00pm';
+                     document.querySelector("#table32").innerText = '152辆';
+                     document.querySelector("#table41").innerText = '';
+                     document.querySelector("#table42").innerText = '';
+                 }
+                 else if (e.target.content[1] == '武汉音乐学院附近'){
+                     option2.series[0].data = [32, 12, 0, 0, 239, 99, 87,233,88,154,149,45];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '239辆';
+                     document.querySelector("#table21").innerText = '12:00pm~14:00pm';
+                     document.querySelector("#table22").innerText = '233辆';
+                     document.querySelector("#table31").innerText = '16:00pm~18:00pm';
+                     document.querySelector("#table32").innerText = '154辆';
+                     document.querySelector("#table41").innerText = '18:00pm~20:00pm';
+                     document.querySelector("#table42").innerText = '149辆';
+                 }
+                 else if (e.target.content[1] == '湖北经济学院附近'){
+                     option2.series[0].data = [23, 5, 0, 0, 144, 56, 87,156,88,199,66,45];
+                     document.querySelector("#table11").innerText = '6:00am~8:00am';
+                     document.querySelector("#table12").innerText = '144辆';
+                     document.querySelector("#table21").innerText = '12:00pm~14:00pm';
+                     document.querySelector("#table22").innerText = '156辆';
+                     document.querySelector("#table31").innerText = '16:00pm~18:00pm';
+                     document.querySelector("#table32").innerText = '199辆';
+                     document.querySelector("#table41").innerText = '';
+                     document.querySelector("#table42").innerText = '';
+                 }
+
+                 myChart2.setOption(option2);
+             }
+
+             circle.on('click', showInfoC);
+             circle1.on('click', showInfoC);
+             circle2.on('click', showInfoC);
+             circle3.on('click', showInfoC);
+             circle4.on('click', showInfoC);
+             circle5.on('click', showInfoC);
+             circle6.on('click', showInfoC);
+             circle7.on('click', showInfoC);
+             circle8.on('click', showInfoC);
+             circle9.on('click', showInfoC);
+             circle10.on('click', showInfoC);
+             circle11.on('click', showInfoC);
+             circle12.on('click', showInfoC);
+             circle13.on('click', showInfoC);
+             circle14.on('click', showInfoC);
+
+                map.onmousewheel=function (e) {
+                e= e || window.event;
+                if(document.all){ 
+                e.cancelBubble=true;
+                }else{ e.stopPropagation(); }
+                }; 
+              
+     </script>
+    
+    
+    
+    <script>
+        
+            var option;
+            setTimeout(function(){
+                option = {
+                    backgroundColor:'#ffffff',
+                    title:{         
+                        text:'武汉大学附近',
+                        left:'center'
+                    },
+                    
+                    tooltip: {
+                        trigger: 'axis',
+                        showContent: false
+                    },
+                    dataset: {
+                        source: [
+                            ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
+                                '18:00', '20:00', '22:00'],
+                            ['正常未使用单车', 141, 130, 165, 153, 183, 148,141, 130, 165,141,130, 165],
+                            ['故障单车', 86, 92, 85, 83, 73, 55,71, 60, 40,40, 32, 42],
+
+                        ]
+                    },
+                    xAxis: {type: 'category'},
+                    yAxis: {gridIndex: 0,
+                        splitLine:{
+                            show:false
+                        }
+                    },
+                    grid: {top: '55%'},
+                    series: [
+                        {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+                        {type: 'line', smooth: true, seriesLayoutBy: 'row',color:'#000000'},
+                        
+                        {
+                            type: 'pie',
+                            id: 'pie',
+                            radius: '30%',
+                            center: ['50%', '25%'],
+                            label: {
+                                formatter: '{b}: {@00:00} ({d}%)'
+                            },
+                            encode: {
+                                itemName: 'product',
+                                value: '00:00',
+                                tooltip: '00:00'
+                            }
+                        }
+                    ]
+                };
+
+                var myChart = echarts.init(document.getElementById('t5'));
+                        
+                myChart.on('updateAxisPointer', function (event) {
+                    var xAxisInfo = event.axesInfo[0];
+                    if (xAxisInfo) {
+                        var dimension = xAxisInfo.value + 1;
+                        myChart.setOption({
+                            series: {
+                                id: 'pie',
+                                label: {
+                                    formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                                },
+                                encode: {
+                                    value: dimension,
+                                    tooltip: dimension
+                                }
+                            }
+                        });
+                    }
+                });
+                myChart.setOption(option);
+            });
+            myChart.setOption(option);
+
+            
+    </script>
+
+     <script type="text/javascript">
+        
+        var option2 = {
+            title: {
+                text: '需求量趋势',
+                left:'center'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['00：00', '02：00', '04：00', '06：00', '08：00', '10：00', '12：00','14：00','16：00','18：00','20：00','22:00']
+            },
+            yAxis: {
+                type: 'value',
+                splitLine:{
+                    show:false
+                }
+            },
+            series: [
+                {
+                    name: '昨天',
+                    type: 'line',
+                    smooth:true,
+                    itemStyle : {
+                                normal : {  
+                                    color:'#000000',
+                                    lineStyle:{  
+                                        color:'red'  
+                                    }  
+                                }  
+                            },  
+                    data: [10, 4, 0, 1, 376, 150, 245,259,111,222,144,99]
+                },
+                
+            ]
+        };
+     
+        
+         var width = $("#t5").width();
+     
+        $("#t3").css("width", width);
+        var myChart2 = echarts.init(document.getElementById('t3'));
+                    myChart2.setOption(option2);
+        
+       
+        
+     </script>
+    
+
+    <script type="text/javascript">
+        window.onload=function(){
+            document.getElementById("button1").style.background="#24c2ce";
+        }
+    </script>
+
+    <script type="text/javascript">
+        function change() {
+
+            document.getElementById("button1").style.background="#24c2ce";
+            document.getElementById("button2").style.background="#D3D3D3";
+
+        }
+
+        function change2() {
+            document.getElementById("button1").style.background="#D3D3D3";
+            document.getElementById("button2").style.background="#24c2ce";
+            window.location.href="bike_dist2.html";
+        }
+    </script>
+
+
+
+</body>
+</html>
+
+
+
+

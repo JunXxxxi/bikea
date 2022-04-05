@@ -32,7 +32,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+                <a class="navbar-brand" href="index2.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -64,16 +64,16 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="index.html">单车概况</a>
+                                <a href="index2.html">单车概况</a>
                             </li>
                             <li>
-                                <a href="table.html">单车分布</a>
+                                <a href="table2.html">单车分布</a>
                             </li>
                             <li>
-                                <a href="form.html">高峰期分析</a>
+                                <a href="form2.html">高峰期分析</a>
                             </li>
                             <li>
-                                <a href="analyseB1.html">单车数据分析</a>
+                                <a href="analyseB2.html">单车数据分析</a>
                             </li>
                         </ul>
                     </li>
@@ -82,22 +82,23 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="newold.html">用户概况</a>
+                                <a href="newold2.html">用户概况</a>
                             </li>
                             <li>
-                                <a href="personas.html">用户画像</a>
+                                <a href="personas2.html">用户画像</a>
                             </li>
                             <li>
-                                <a href="analyseU1.html">用户数据分析</a>
+                                <a href="analyseU2.html">用户数据分析</a>
                             </li>
                         </ul>
                     </li>
+
 
                     <li>
                         <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="order2.html">订单详情</a>
+                                <a href="order22.html">订单详情</a>
                             </li>
 
                         </ul>
@@ -107,12 +108,11 @@
                         <a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="response.html">用户反馈</a>
+                                <a href="response2.html">用户反馈</a>
                             </li>
                             <li>
-                                <a href="warn.html">警示信息</a>
+                                <a href="warn2.html">警示信息</a>
                             </li>
-
                         </ul>
                     </li>
                 </ul>
@@ -130,8 +130,8 @@
             <div id="page-inner">
                 <div class="row">
                     <div  style="float: right;margin-top:0">
-                        <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black">武汉</span></button>
-                        <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black"><span style="color: black">北京</span></span></button>
+                        <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black">武汉</span></button>
+                        <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black"><span style="color: black">北京</span></span></button>
                     </div>
                 </div>
 
@@ -192,7 +192,7 @@
                                         </thead>
 
                                         <tbody>
-                                        <tr th:each="bike:${bikeList}">
+                                        <tr th:each="bike:${bikeList2}">
                                             <td th:text="${bike.getBikeID()}"></td>
                                             <td th:text="${bike.getStatus()}"></td>
                                             <td th:text="${bike.getIsUsing()==0?'未被使用':'使用中'}"></td>
@@ -248,6 +248,7 @@
 <script th:src="@{/js/echarts.js}"></script>
 <script th:src="@{/js/bmap.js}"></script>
 <script src="https://webapi.amap.com/maps?v=1.4.15&key=7aef2bd5ae16f2aad3de37f388d0c49c"></script>
+
 <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
 <script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/underscore-min.js" ></script>
 <script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/backbone-min.js" ></script>
@@ -430,7 +431,7 @@
             backgroundColor:'#ffffff',
             title:{
                 left:'center',
-                text:'武汉大学附近'
+                text:'三里屯附近'
             },
             legend: {
                 data:['正常未使用单车','故障单车']
@@ -443,8 +444,8 @@
                 source: [
                     ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                         '18:00', '20:00', '22:00'],
-                    ['正常未使用单车', 141, 130, 165, 153, 183, 148,141, 130, 165,141,130, 165],
-                    ['故障单车', 86, 92, 85, 83, 73, 55,71, 60, 40,40, 32, 42],
+                    ['正常未使用单车', 245, 197, 197, 190, 310, 322,187, 130, 43,0,55, 129],
+                    ['故障单车', 42, 40, 40, 24, 25, 55,64, 60, 51,55, 55, 69],
 
                 ]
             },
@@ -498,7 +499,7 @@
     var map = new AMap.Map('t1', {
         resizeEnable: true, //是否监控地图容器尺寸变化
         zoom:13, //初始化地图层级
-        center: [114.31667,30.51667] //初始化地图中心点
+        center: [116.401221,39.925092] //初始化地图中心点
     });
     function logMapinfo(){
         map.getCity( function(info){
@@ -513,7 +514,7 @@
     //绑定地图移动事件
     map.on('moveend', logMapinfo);
     var circle = new AMap.Circle({
-        center: new AMap.LngLat(114.353503,30.526597),  // 圆心位置
+        center: new AMap.LngLat(116.411184,39.912189),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -530,7 +531,7 @@
     });
 
     var circle1 = new AMap.Circle({
-        center: new AMap.LngLat(114.360257,30.528439),  // 圆心位置
+        center: new AMap.LngLat(116.403243,39.937135),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -547,7 +548,7 @@
     });
 
     var circle2 = new AMap.Circle({
-        center: new AMap.LngLat(114.397169,30.50576),  // 圆心位置
+        center: new AMap.LngLat(116.455484,39.937189),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -564,7 +565,7 @@
     });
 
     var circle3 = new AMap.Circle({
-        center: new AMap.LngLat(114.402539,30.505277),  // 圆心位置
+        center: new AMap.LngLat(116.448446,39.931266),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -581,7 +582,7 @@
     });
 
     var circle4 = new AMap.Circle({
-        center: new AMap.LngLat(114.386124,30.473816),  // 圆心位置
+        center: new AMap.LngLat(116.365349,39.960378),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -598,7 +599,7 @@
     });
 
     var circle5 = new AMap.Circle({
-        center: new AMap.LngLat(114.332737,30.507838),  // 圆心位置
+        center: new AMap.LngLat(116.360284,39.902987),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -615,7 +616,7 @@
     });
 
     var circle6 = new AMap.Circle({
-        center: new AMap.LngLat(114.326386,30.503475),  // 圆心位置
+        center: new AMap.LngLat(116.453754,39.925568),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -632,7 +633,7 @@
     });
 
     var circle7 = new AMap.Circle({
-        center: new AMap.LngLat(114.354109,30.475924),  // 圆心位置
+        center: new AMap.LngLat(116.337797,39.992739),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -649,7 +650,7 @@
     });
 
     var circle8 = new AMap.Circle({
-        center: new AMap.LngLat(114.410537,30.477059),  // 圆心位置
+        center: new AMap.LngLat(116.421224,39.882441),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -666,7 +667,7 @@
     });
 
     var circle9 = new AMap.Circle({
-        center: new AMap.LngLat(114.391363,30.453568),  // 圆心位置
+        center: new AMap.LngLat(116.395818,39.937151),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -683,7 +684,7 @@
     });
 
     var circle10 = new AMap.Circle({
-        center: new AMap.LngLat(114.329738,30.556129),  // 圆心位置
+        center: new AMap.LngLat(116.401312,39.907464),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -700,58 +701,7 @@
     });
 
     var circle11 = new AMap.Circle({
-        center: new AMap.LngLat(114.392846,30.591334),  // 圆心位置
-        radius: 1000, // 圆半径
-        borderWeight: 3,
-        strokeColor: "#FF33FF",
-        strokeOpacity: 1,
-        strokeWeight: 6,
-        strokeOpacity: 0.2,
-        fillOpacity: 0.4,
-        strokeStyle: 'dashed',
-        strokeDasharray: [10, 10],
-        // 线样式还支持 'dashed'
-        fillColor: 'red',
-        zIndex: 50,
-
-    });
-
-    var circle12 = new AMap.Circle({
-        center: new AMap.LngLat(114.413675,30.547503),  // 圆心位置
-        radius: 1000, // 圆半径
-        borderWeight: 3,
-        strokeColor: "#FF33FF",
-        strokeOpacity: 1,
-        strokeWeight: 6,
-        strokeOpacity: 0.2,
-        fillOpacity: 0.4,
-        strokeStyle: 'dashed',
-        strokeDasharray: [10, 10],
-        // 线样式还支持 'dashed'
-        fillColor: 'red',
-        zIndex: 50,
-
-    });
-
-    var circle13 = new AMap.Circle({
-        center: new AMap.LngLat(114.294886,30.537154),  // 圆心位置
-        radius: 1000, // 圆半径
-        borderWeight: 3,
-        strokeColor: "#FF33FF",
-        strokeOpacity: 1,
-        strokeWeight: 6,
-        strokeOpacity: 0.2,
-        fillOpacity: 0.4,
-        strokeStyle: 'dashed',
-        strokeDasharray: [10, 10],
-        // 线样式还支持 'dashed'
-        fillColor: 'red',
-        zIndex: 50,
-
-    });
-
-    var circle14 = new AMap.Circle({
-        center: new AMap.LngLat(114.436335,30.418504),  // 圆心位置
+        center: new AMap.LngLat(116.482767,39.942466),  // 圆心位置
         radius: 1000, // 圆半径
         borderWeight: 3,
         strokeColor: "#FF33FF",
@@ -779,27 +729,19 @@
     map.add(circle9);
     map.add(circle10);
     map.add(circle11);
-    map.add(circle12);
-    map.add(circle13);
-    map.add(circle14);
-    circle.content=['114.353503,30.526597','街道口附近'];
-    circle1.content=['114.360257,30.528439','武汉大学附近'];
-    circle2.content=['114.397169,30.50576','光谷广场附近'];
-    circle3.content=['114.402539,30.505277','光谷步行街附近'];
-    circle4.content=['114.386124,30.473816','中南财经政法大学南湖校区附近'];
-    circle5.content=['114.332737,30.507838','武汉理工大学南湖校区附近'];
-    circle6.content=['114.326386,30.503475','佰港城附近'];
-    circle7.content=['114.354109,30.475924','华中农业大学附近'];
-    circle8.content=['114.410537,30.477059','光谷天地附近'];
-    circle9.content=['114.391363,30.453568','华中师大一附中附近'];
-    circle10.content=['114.329738,30.556129','湖北省图书馆附近'];
-    circle11.content=['114.392846,30.591334','武汉欢乐谷附近'];
-    circle12.content=['114.413675,30.547503','东湖磨山景区附近'];
-    circle13.content=['114.294886,30.537154','武汉音乐学院附近'];
-    circle14.content=['114.436335,30.418504','湖北经济学院附近'];
 
-
-
+    circle.content=['116.411184,39.912189','王府井步行街附近'];
+    circle1.content=['116.403243,39.937135','南锣鼓巷附近'];
+    circle2.content=['116.455484,39.937189','三里屯附近'];
+    circle3.content=['116.448446,39.931266','工人体育馆附近'];
+    circle4.content=['116.365349,39.960378','北京师范大学附近'];
+    circle5.content=['116.360284,39.902987','中央音乐学院附近'];
+    circle6.content=['116.453754,39.925568','北京朝阳医院附近'];
+    circle7.content=['116.337797,39.992739','五道口附近'];
+    circle8.content=['116.421224,39.882441','天坛东门附近'];
+    circle9.content=['116.395818,39.937151','什刹海附近'];
+    circle10.content=['116.401312,39.907464','天安门东附近'];
+    circle11.content=['116.482767,39.942466','朝阳公园附近'];
 
 
     function showInfoM(e){
@@ -821,80 +763,80 @@
                 // document.querySelector("#text").innerText = text;
                 // option.title.text = e.target.content[1];
                 // myChart = echarts.init(document.getElementById('t5'));
-                if (e.target.content[1] == '街道口附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:99' + '\n'+'当前故障单车数量:92'+'\n'
+                if (e.target.content[1] == '王府井步行街附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:15' + '\n'+'当前故障单车数量:32'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 112, 114, 120, 101, 40, 48,41, 60, 65,41, 47, 70],
-                        ['故障单车', 66, 70, 70, 70, 98, 110,112, 151, 160,120, 99, 80],
+                        ['正常未使用单车', 238, 230, 231, 198, 152, 94,41, 44, 15,33, 47, 155],
+                        ['故障单车', 66, 70, 70, 70, 98, 30,31, 35, 48,33, 41, 55],
                     ];
                 }
-                else if(e.target.content[1] == '武汉大学附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:168' + '\n'+'当前故障单车数量:45'+'\n'
+                else if(e.target.content[1] == '南锣鼓巷附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:113' + '\n'+'当前故障单车数量:25'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 141, 130, 165, 153, 183, 148,141, 130, 165,141,130, 165],
-                        ['故障单车', 86, 92, 85, 83, 73, 55,71, 60, 40,40, 32, 42],
+                        ['正常未使用单车', 34, 34, 34, 35, 156, 245,153, 122, 165,210,130, 52],
+                        ['故障单车', 32, 45, 45, 47, 85, 55,34, 43, 54,31, 32, 33],
                     ];
                 }
-                else if(e.target.content[1] == '光谷广场附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:21' + '\n'+'当前故障单车数量:42'+'\n'
+                else if(e.target.content[1] == '三里屯附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:12' + '\n'+'当前故障单车数量:67'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 40, 50, 55, 66, 190, 199,250, 220, 144,60, 55, 49],
-                        ['故障单车', 31, 33, 34, 45, 59, 70,55, 66, 40,44, 35, 32],
+                        ['正常未使用单车', 245, 197, 197, 190, 310, 322,187, 130, 43,0,55, 129],
+                        ['故障单车', 42, 40, 40, 24, 25, 55,64, 60, 51,55, 55, 69],
                     ];
                 }
-                else if(e.target.content[1] == '光谷步行街附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:155' + '\n'+'当前故障单车数量:43'+'\n'
+                else if(e.target.content[1] == '工人体育馆附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:235' + '\n'+'当前故障单车数量:40'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 55, 57, 61, 50, 160, 210,222, 160, 99,110, 80, 101],
-                        ['故障单车', 58, 60, 50, 40, 51, 70,88, 90, 66,40, 55, 69],
+                        ['正常未使用单车', 55, 43, 0, 0, 12, 89,102, 160, 211,235, 240, 101],
+                        ['故障单车', 58, 60, 60, 55, 70, 70,88, 51, 44,40, 78, 69],
                     ];
                 }
-                else if(e.target.content[1] == '中南财经政法大学南湖校区附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:133' + '\n'+'当前故障单车数量:27'+'\n'
+                else if(e.target.content[1] == '北京师范大学附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:146' + '\n'+'当前故障单车数量:38'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 121, 123, 124, 139, 195, 170,144, 106, 99,55, 77, 90],
-                        ['故障单车', 23, 22, 22, 33, 34, 41,43, 66, 51,55, 32, 31],
+                        ['正常未使用单车', 121, 123, 124, 139, 195, 234,257, 106, 146,55, 178, 90],
+                        ['故障单车', 45, 45, 45, 45, 57, 62,79, 30, 34,38, 44, 31],
                     ];
                 }
-                else if(e.target.content[1] == '武汉理工大学南湖校区附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:33' + '\n'+'当前故障单车数量:65'+'\n'
+                else if(e.target.content[1] == '中央音乐学院附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:142' + '\n'+'当前故障单车数量:30'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 90, 92, 94, 99, 220, 271,102, 33, 150,122, 80, 22],
+                        ['正常未使用单车', 90, 92, 94, 99, 157, 166,132, 129, 42,33, 80, 95],
                         ['故障单车', 18, 18, 17, 21, 51, 71,70, 88, 50,55, 41, 30],
                     ];
                 }
-                else if(e.target.content[1] == '佰港城附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:84' + '\n'+'当前故障单车数量:21'+'\n'
+                else if(e.target.content[1] == '北京朝阳医院附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:141' + '\n'+'当前故障单车数量:31'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
@@ -905,102 +847,67 @@
                         ['故障单车', 22, 24, 25, 27, 31, 57,40, 66, 31,56, 44, 25],
                     ];
                 }
-                else if(e.target.content[1] == '华中农业大学附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:266' + '\n'+'当前故障单车数量:44'+'\n'
+                else if(e.target.content[1] == '五道口附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:266' + '\n'+'当前故障单车数量:101'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 155, 154, 156, 167, 222, 260,244, 210, 255,153, 120, 136],
-                        ['故障单车', 55, 44, 60, 51, 66, 68,77, 77, 77,61, 59, 61],
+                        ['正常未使用单车', 321, 320, 320, 322, 356, 311,287, 256, 199,189, 267, 299],
+                        ['故障单车', 55, 44, 60, 89, 95, 101,111, 50, 52,52, 59, 61],
                     ];
                 }
-                else if(e.target.content[1] == '光谷天地附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:69' + '\n'+'当前故障单车数量:23'+'\n'
+                else if(e.target.content[1] == '天坛东门附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:111' + '\n'+'当前故障单车数量:23'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 41, 41, 43, 56, 150, 190,210, 222, 111,70, 80, 55],
+                        ['正常未使用单车', 31, 41, 41, 41, 150, 198,210, 222, 111,70, 80, 55],
                         ['故障单车', 11, 11, 12, 16, 21, 33,38, 33, 22,19, 19, 15],
                     ];
                 }
-                else if(e.target.content[1] == '华中师大一附中附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:133' + '\n'+'当前故障单车数量:15'+'\n'
+                else if(e.target.content[1] == '什刹海附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:0' + '\n'+'当前故障单车数量:52'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 144, 145, 145, 150, 190, 211,210, 158, 144,111, 123, 133],
+                        ['正常未使用单车', 33, 33, 32, 30, 156, 211,210, 158, 64,21, 0, 0],
                         ['故障单车', 33, 33, 35, 36, 41, 33,38, 50, 51,52, 55, 59],
                     ];
                 }
-                else if(e.target.content[1] == '湖北省图书馆附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:82' + '\n'+'当前故障单车数量:40'+'\n'
+                else if(e.target.content[1] == '天安门东附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:121' + '\n'+'当前故障单车数量:27'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 39, 33, 34, 39, 111, 155,245, 277, 310,222, 100, 55],
-                        ['故障单车', 21, 22, 25, 30, 33, 45,66, 77, 58,61, 31, 39],
+                        ['正常未使用单车', 134, 134, 136, 96, 111, 155,245, 210, 155,141, 80, 95],
+                        ['故障单车', 21, 22, 25, 25, 26, 20,23, 31, 32,30, 31, 27],
                     ];
                 }
-                else if(e.target.content[1] == '武汉欢乐谷附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:77' + '\n'+'当前故障单车数量:51'+'\n'
+                else if(e.target.content[1] == '朝阳公园附近'){
+                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:77' + '\n'+'当前故障单车数量:31'+'\n'
                     document.querySelector("#text").innerText = text;
                     option.title.text = e.target.content[1];
                     myChart = echarts.init(document.getElementById('t5'));
                     option.dataset.source = [
                         ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
                             '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 55, 59, 59, 67, 133, 190,210, 288, 210,216, 111, 67],
-                        ['故障单车', 17, 15, 15, 16, 44, 21,55, 55, 66,75, 78, 70],
+                        ['正常未使用单车', 55, 59, 59, 67, 133, 190,210, 121, 116,67, 55, 46],
+                        ['故障单车', 17, 15, 15, 16, 44, 45,55, 55, 31,24, 28, 37],
                     ];
                 }
-                else if(e.target.content[1] == '东湖磨山景区附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:158' + '\n'+'当前故障单车数量:103'+'\n'
-                    document.querySelector("#text").innerText = text;
-                    option.title.text = e.target.content[1];
-                    myChart = echarts.init(document.getElementById('t5'));
-                    option.dataset.source = [
-                        ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
-                            '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 111, 112, 112, 141, 156, 188,255, 222, 190,111, 74, 89],
-                        ['故障单车', 55, 55, 51, 66, 87, 111,88, 80, 90,99, 60, 77],
-                    ];
-                }
-                else if(e.target.content[1] == '武汉音乐学院附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:142' + '\n'+'当前故障单车数量:45'+'\n'
-                    document.querySelector("#text").innerText = text;
-                    option.title.text = e.target.content[1];
-                    myChart = echarts.init(document.getElementById('t5'));
-                    option.dataset.source = [
-                        ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
-                            '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 99, 103, 104, 111, 150, 166,222, 250, 290,210, 99, 89],
-                        ['故障单车', 41, 41, 33, 36, 55, 66,77, 75, 73,66, 51, 45],
-                    ];
-                }
-                else if(e.target.content[1] == '湖北经济学院附近'){
-                    var text = '地点：'+e.target.content[1]+'\n坐标： [ '+ e.target.content[0]+' ] '+'\n'+'当前正常未使用单车数量:231' + '\n'+'当前故障单车数量:27'+'\n'
-                    document.querySelector("#text").innerText = text;
-                    option.title.text = e.target.content[1];
-                    myChart = echarts.init(document.getElementById('t5'));
-                    option.dataset.source = [
-                        ['product', '00:00', '02:00',  '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00',
-                            '18:00', '20:00', '22:00'],
-                        ['正常未使用单车', 133, 140, 133, 150, 211, 222,270, 333, 278,188, 111, 143],
-                        ['故障单车', 66, 66, 67, 70, 30, 33,38, 39, 40,44, 45, 55],
-                    ];
-                }
+
                 myChart.setOption(option);
                 // title_ = e.target.content[1];
 
@@ -1021,10 +928,6 @@
     circle9.on('click', showInfoC);
     circle10.on('click', showInfoC);
     circle11.on('click', showInfoC);
-    circle12.on('click', showInfoC);
-    circle13.on('click', showInfoC);
-    circle14.on('click', showInfoC);
-
 
     map.onmousewheel=function (e) {
         e= e || window.event;
@@ -1038,7 +941,7 @@
 
     <script type="text/javascript">
         window.onload=function(){
-            document.getElementById("button1").style.background="#24c2ce";
+            document.getElementById("button2").style.background="#24c2ce";
         }
     </script>
 
@@ -1047,13 +950,12 @@
 
             document.getElementById("button1").style.background="#24c2ce";
             document.getElementById("button2").style.background="#D3D3D3";
-
+            window.location.href="table.html";
         }
 
         function change2() {
             document.getElementById("button1").style.background="#D3D3D3";
             document.getElementById("button2").style.background="#24c2ce";
-            window.location.href="table2.html";
         }
     </script>
 

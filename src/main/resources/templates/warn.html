@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+	<title>共享单车数据可视化分析系统</title>
+	<!-- Bootstrap Styles-->
+	<link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+	<!-- FontAwesome Styles-->
+	<link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+	<link th:href="@{/js/morris/morris-0.4.3.min.css}" rel="stylesheet" />
+	<!-- Morris Chart Styles-->
+	<link th:href="@{/css/layui.css}" rel="stylesheet" />
+	<!-- Custom Styles-->
+	<link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+	<!-- Google Fonts-->
+	<link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />
+	<!-- TABLE STYLES-->
+	<link th:href="@{/js/dataTables/dataTables.bootstrap.css}" rel="stylesheet" />
+	<link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+	<link rel="stylesheet" type="text/css" href="https://a.amap.com/jsapi_demos/static/demo-center/css/prety-json.css">
+	<style>
+		.text_box_left {
+			padding:6px;
+			padding-left:12px;
+			background:#eee;
+			border-bottom: solid 1px #ccc;
+			width:994px;
+			margin-top:-5px;
+			margin-left: -12px;
+			margin-bottom:5px;
+
+		}
+
+	</style>
+	<style type="text/css">
+		#page-inner{
+			min-height: 595px
+		}
+		#page-wrapper{
+			min-height: 595px
+		}
+		.animated {
+			-webkit-animation-duration: 1s;
+			animation-duration: 1s;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both; }
+		@-webkit-keyframes fadeIn {
+			from {
+				opacity: 0; }
+			to {
+				opacity: 1; } }
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0; }
+			to {
+				opacity: 1; } }
+
+		.fadeIn {
+			-webkit-animation-name: fadeIn;
+			animation-name: fadeIn; }
+
+	</style>
+
+</head>
+<body>
+<div id="wrapper">
+	<nav class="navbar navbar-default top-navbar" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong><span style="font-size: 15px">共享单车数据可视化分析系统</span></strong></a>
+		</div>
+
+		<ul class="nav navbar-top-links navbar-right">
+
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+					<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-user">
+					<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+					</li>
+					<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+					</li>
+					<li class="divider"></li>
+					<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+					</li>
+				</ul>
+				<!-- /.dropdown-user -->
+			</li>
+			<!-- /.dropdown -->
+		</ul>
+	</nav>
+	<!--/. NAV TOP  -->
+	<nav class="navbar-default navbar-side" role="navigation">
+		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+		<div class="sidebar-collapse">
+			<ul class="nav" >
+				<li>
+					<a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="index.html">单车概况</a>
+						</li>
+						<li>
+							<a href="bike_detail.html">单车详情</a>
+						</li>
+						<li>
+							<a href="bike_dist.html">单车分布与高峰期分析</a>
+						</li>
+						<li>
+							<a href="analyseB1.html">单车数据分析</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="newold.html">用户概况</a>
+						</li>
+						<li>
+							<a href="personas.html">用户画像</a>
+						</li>
+						<li>
+							<a href="analyseU1.html">用户数据分析</a>
+						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="order2.html">订单详情</a>
+						</li>
+
+					</ul>
+				</li>
+
+				<li>
+					<a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="response.html">用户反馈</a>
+						</li>
+						<li>
+							<a href="warn.html">警示信息</a>
+						</li>
+
+					</ul>
+				</li>
+			</ul>
+
+		</div>
+
+	</nav>
+</div>
+
+
+	<!-- /. NAV SIDE  -->
+
+
+
+	<div id="page-wrapper" >
+		<div id="page-inner">
+			<div class="row">
+				<div  style="float: right;margin-top:0">
+					<button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black">武汉</span></button></button>
+					<button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black"><span style="color: black">北京</span></span></button>
+				</div>
+
+				<div class="row">
+					<div class="col-md-15">
+						<h1 class="page-header">
+							Bike Warning <small>Accuracy</small>
+						</h1>
+
+					</div>
+				</div>
+
+				<div class="animated fadeIn">
+
+				<div class="row">
+					<div class="col-md-12">
+
+						<div class="layui-tab layui-tab-card">
+
+							<ul class="layui-tab-title">
+								<li class="layui-this" >预警信息</li>
+
+							</ul>
+							<div class="layui-tab-content">
+								<div class="layui-tab-item layui-show" id="t1" style="width: 100%;height: 600px;">
+
+								</div>
+								<div class="info" style="margin-top:217px;margin-right: 22px;">
+
+									<span style="color: red">红圈：</span><span>单车故障多且可用单车少</span><br/>
+									<span style="color: yellow">黄圈：</span><span>可用单车少</span><br/>
+									<span style="color:blue">蓝圈：</span><span>单车故障多</span>
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+				<!--End Advanced Tables -->
+			</div>
+
+			<div class="row" style="background:#eee;height: 600px;" >
+
+			<div class="col-md-12">
+				<span style="font-size: 25px;margin-left: 20px">实况预警信息</span>
+
+				<hr style="margin-top:15px">
+				<div class="row" style="margin-top: 20px">
+
+					<div class="col-md-3 col-sm-2">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								Broken
+							</div>
+							<div class="panel-body">
+								<p style="padding-top: 0">
+									<h3>故障单车多</h3><br>
+
+									地点：武汉欢乐谷<br>
+									坐标：[114.392846,30.591334]<br>
+									故障单车数量:51
+									</p>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-2">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									Broken&Lack
+								</div>
+								<div class="panel-body">
+									<p style="padding-top: 0">
+									<h3>故障单车多</h3><br>
+
+									地点：街道口附近<br>
+									坐标：[114.353503,30.526597]<br>
+									故障单车数量:92
+									</p>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-2">
+							<div class="panel panel-warning">
+								<div class="panel-heading">
+									Lack
+								</div>
+								<div class="panel-body">
+									<p style="padding-top: 0">
+									<h3>单车缺乏</h3><br>
+
+									地点：光谷广场<br>
+									坐标：[114.397169,30.50576]<br>
+									可使用单车数量:21
+									</p>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-2">
+							<div class="panel panel-danger">
+								<div class="panel-heading">
+									Broken & Lack
+								</div>
+								<div class="panel-body">
+									<p style="padding-top: 0">
+									<h3>故障单车多&缺单车</h3><br>
+
+									地点：武汉理工大学南湖校区<br>
+									坐标：[114.332737,30.507838] <br>
+									故障单车数量:65 可使用单车数:33
+									</p>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+					<span style="font-size: 25px;margin-left: 20px">用户反馈预警信息</span>
+					<hr style="margin-top:14px">
+					<div class="row" style="margin-top: 20px">
+
+						<div class="col-md-3 col-sm-2">
+							<div class="panel panel-primary" style="border: 1px solid #666666" >
+								<div class="panel-heading " style="background:#666666">
+									Question #1
+								</div>
+								<div class="panel-body">
+
+									<p style="padding-top: 0">
+									<h3>故障单车过多</h3><br>
+
+									地点：武汉理工大学南湖<br>
+									坐标:[114.332737,30.507838]<br>
+
+									</p>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-2">
+							<div class="panel panel-primary" style="border: 1px solid #666666" >
+								<div class="panel-heading " style="background:#666666">
+									Question #2
+								</div>
+								<div class="panel-body">
+									<p style="padding-top: 0">
+									<h3>单车少了</h3><br>
+
+									地点：街道口<br>
+									坐标:[114.353503,30.526597]<br>
+									时间段：早上
+									</p>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-2">
+							<div class="panel panel-primary" style="border: 1px solid #666666" >
+								<div class="panel-heading " style="background:#666666">
+									Question #3
+								</div>
+								<div class="panel-body">
+									<p style="padding-top: 0">
+									<h3>单车太少</h3><br>
+
+									地点：中南财经政法大学<br>
+									坐标:[114.386124,30.473816]<br>
+									时间段：早上
+									</p>
+								</div>
+
+							</div>
+						</div>
+
+
+						<div class="col-md-3 col-sm-2">
+							<div class="panel panel-primary" style="border: 1px solid #666666" >
+								<div class="panel-heading " style="background:#666666">
+									Question #4
+								</div>
+								<div class="panel-body">
+									<p style="padding-top: 0">
+									<h3>单车过少</h3><br>
+
+									地点：华中农业大学<br>
+									坐标:[114.354109,30.475924]<br>
+									时间段：8:00 am
+									</p>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+
+	</div>
+	<!-- /. PAGE WRAPPER  -->
+	<!-- /. WRAPPER  -->
+	<!-- JS Scripts-->
+	<!-- jQuery Js -->
+	<script th:src="@{/js/jquery-1.10.2.js}"></script>
+	<!-- Bootstrap Js -->
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- Metis Menu Js -->
+	<script th:src="@{/js/jquery.metisMenu.js}"></script>
+	<!-- DATA TABLE SCRIPTS -->
+	<script th:src="@{/js/dataTables/jquery.dataTables.js}"></script>
+	<script th:src="@{/js/dataTables/dataTables.bootstrap.js}"></script>
+	<script>
+		$(document).ready(function () {
+			$('#dataTables-example').dataTable();
+		});
+	</script>
+	<!-- Custom Js -->
+
+	<!-- Morris Chart Js -->
+	<script th:src="@{/js/morris/raphael-2.1.0.min.js}"></script>
+	<script th:src="@{/js/morris/morris.js}"></script>
+
+
+	<script th:src="@{/js/easypiechart.js}"></script>
+	<script th:src="@{/js/easypiechart-data.js}"></script>
+	<script type="text/javascript" th:src="@{/js/layui.all.js}"></script>
+	<script th:src="@{/js/Lightweight-Chart/jquery.chart.js}"></script>
+	<script th:src="@{/js/echarts.js}"></script>
+	<script th:src="@{/js/bmap.js}"></script>
+	<script src="https://webapi.amap.com/maps?v=1.4.15&key=7aef2bd5ae16f2aad3de37f388d0c49c"></script>
+
+	<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+	<script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/underscore-min.js" ></script>
+	<script type="text/javascript" src="https://a.amap.com/jsapi_demos/static/demo-center/js/backbone-min.js" ></script>
+	<script type="text/javascript" src='https://a.amap.com/jsapi_demos/static/demo-center/js/prety-json.js'></script>
+	<script type="text/javascript">
+		var map = new AMap.Map('t1', {
+			resizeEnable: true, //是否监控地图容器尺寸变化
+			zoom:12.5, //初始化地图层级
+			center: [114.379929,30.511893] //初始化地图中心点
+		});
+		function logMapinfo(){
+			map.getCity( function(info){
+				var node = new PrettyJSON.view.Node({
+					el: document.querySelector("#map-city"),
+					data: info
+				});
+			});
+		}
+
+		logMapinfo();
+		//绑定地图移动事件
+		map.on('moveend', logMapinfo);
+		var circle1 = new AMap.Circle({
+			center: new AMap.LngLat(114.392846,30.591334),
+			radius: 1000, // 圆半径
+			borderWeight: 3,
+			strokeColor: "#FF33FF",
+			strokeOpacity: 1,
+			strokeWeight: 6,
+			strokeOpacity: 0.2,
+			fillOpacity:0.7,
+			strokeStyle: 'dashed',
+			strokeDasharray: [10, 10],
+			// 线样式还支持 'dashed'
+			fillColor: 'blue',
+			zIndex: 50
+		});
+		var circle2 = new AMap.Circle({
+			center: new AMap.LngLat(114.353503,30.526597),
+			radius: 1000, // 圆半径
+			borderWeight: 3,
+			strokeColor: "#FF33FF",
+			strokeOpacity: 1,
+			strokeWeight: 6,
+			strokeOpacity: 0.2,
+			fillOpacity: 0.4,
+			strokeStyle: 'dashed',
+			strokeDasharray: [10, 10],
+			// 线样式还支持 'dashed'
+			fillColor: 'red',
+			zIndex: 50
+		});
+		var circle3 = new AMap.Circle({
+			center: new AMap.LngLat(114.397169,30.50576),
+			radius: 1000, // 圆半径
+			borderWeight: 3,
+			strokeColor: "#FF33FF",
+			strokeOpacity: 1,
+			strokeWeight: 6,
+			strokeOpacity: 0.2,
+			fillOpacity:0.7,
+			strokeStyle: 'dashed',
+			strokeDasharray: [10, 10],
+			// 线样式还支持 'dashed'
+			fillColor: 'yellow',
+			zIndex: 50
+		});
+		var circle4 = new AMap.Circle({
+			center: new AMap.LngLat(114.332737,30.507838),
+			radius: 1000, // 圆半径
+			borderWeight: 3,
+			strokeColor: "#FF33FF",
+			strokeOpacity: 1,
+			strokeWeight: 6,
+			strokeOpacity: 0.2,
+			fillOpacity: 0.4,
+			strokeStyle: 'dashed',
+			strokeDasharray: [10, 10],
+			// 线样式还支持 'dashed'
+			fillColor: 'red',
+			zIndex: 50
+		});
+		map.add(circle1);
+		map.add(circle2);
+		map.add(circle3);
+		map.add(circle4);
+
+		var circle5 = new AMap.Circle({
+			center: new AMap.LngLat(114.386124,30.473816),
+			radius: 1000, // 圆半径
+			borderWeight: 3,
+			strokeColor: "#FF33FF",
+			strokeOpacity: 1,
+			strokeWeight: 6,
+			strokeOpacity: 0.2,
+			fillOpacity:0.7,
+			strokeStyle: 'dashed',
+			strokeDasharray: [10, 10],
+			// 线样式还支持 'dashed'
+			fillColor: 'yellow',
+			zIndex: 50
+		});
+		var circle6 = new AMap.Circle({
+			center: new AMap.LngLat(114.354109,30.475924),
+			radius: 1000, // 圆半径
+			borderWeight: 3,
+			strokeColor: "#FF33FF",
+			strokeOpacity: 1,
+			strokeWeight: 6,
+			strokeOpacity: 0.2,
+			fillOpacity:0.7,
+			strokeStyle: 'dashed',
+			strokeDasharray: [10, 10],
+			// 线样式还支持 'dashed'
+			fillColor: 'yellow',
+			zIndex: 50
+		});
+
+
+		map.add(circle5);
+		map.add(circle6);
+
+
+		var circle9 = new AMap.Circle({
+			center: new AMap.LngLat(114.413675,30.547503),
+			radius: 1000, // 圆半径
+			borderWeight: 3,
+			strokeColor: "#FF33FF",
+			strokeOpacity: 1,
+			strokeWeight: 6,
+			strokeOpacity: 0.2,
+			fillOpacity:0.7,
+			strokeStyle: 'dashed',
+			strokeDasharray: [10, 10],
+			// 线样式还支持 'dashed'
+			fillColor: 'blue',
+
+			zIndex: 50
+
+		});
+		map.add(circle9);
+
+	</script>
+
+
+
+	<script type="text/javascript">
+		window.onload=function(){
+			document.getElementById("button1").style.background="#24c2ce";
+		}
+	</script>
+
+	<script type="text/javascript">
+		function change() {
+			document.getElementById("button1").style.background="#24c2ce";
+			document.getElementById("button2").style.background="#D3D3D3";
+
+		}
+
+		function change2() {
+			document.getElementById("button1").style.background="#D3D3D3";
+			document.getElementById("button2").style.background="#24c2ce";
+			window.location.href="warn2.html";
+		}
+	</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+    <!-- Google Fonts-->
+   <link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <style type="text/css">
+         #page-wrapper{
+            min-height: 500px;
+
+         }
+         #page-inner{
+            min-height: 640px;
+         }
+         @media(min-width:768px) {
+     #page-wrapper{
+               margin: 0 0 0 0px;
+        padding: 15px 30px;
+        
+               min-height: 500px;
+        
+    }
+    .top-navbar .navbar-brand:hover { 
+        background:none;
+        color:#000000;
+    }
+    .top-navbar .navbar-brand {
+    color: #fff;
+    width: 260px;
+    text-align: left;
+    height: 60px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 30px;
+    background:none;
+    }
+
+   </style>
+</head>
+<body>
+   <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+            </div>
+        </nav>
+        
+
+       
+        <!--/. NAV TOP  -->
+        
+    </div>
+        <!-- /. NAV SIDE  -->
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+    			 <div class="row" style="margin-top: 20px">
+                    <div class="col-md-15">
+                        <div class="col-md-5" style="margin-left:70px" > 
+                            <img th:src="@{/images/user_6.png}" style="width:100%;height: 100%;margin-top:12px">
+                        </div>
+
+                        <div class="col-md-5" style="margin-left:120px;margin-top: 10px" >
+                            <h2>骑行时间与消费-散点图 </h2>
+                            <p>&nbsp</p>
+                            <p>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp散点图是指数据点在直角坐标系平面上的分布图，散点图表示因变量随自变量而变化的大致趋势，据此可以选择合适的函数对数据点进行拟合。</p>
+                            <p>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp用骑行时间与消费两组数据构成多个坐标点，考察坐标点的分布，判断两变量之间是否存在某种关联或总结坐标点的分布模式。</p>
+                            <p>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp颜色越深代表y轴坐标越大。由图可以直观地得出骑行时间与消费的分布状况，当骑行时间在某一区间时，其消费水平也稳定在某一范围，超出一定时间时其消费才会陡然上升。结合实际情况可知，这是由于单车按小时收费规则导致的。
+                            </p>
+                        </div>
+                        
+                        <div style="width:100px;height: 100px;position: absolute;top: 30px;left: 1430px">
+                            <a href="javascript:history.back(-1)" >
+                                <i class="fa fa-reply" style="font-size: 50px;color: #FF8C00"></i>      
+                            </a>
+                        </div>
+
+                        
+                    </div>
+                </div> 
+
+               
+                 <!-- /. ROW  -->
+				 
+				
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+
+
+
+
+
+
+
+
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+   <script th:src="@{/js/jquery-1.10.2.js}"></script>
+   <!-- Bootstrap Js -->
+   <script th:src="@{/js/bootstrap.min.js}"></script>
+   <!-- Metis Menu Js -->
+   <script th:src="@{/js/jquery.metisMenu.js}"></script>
+   <!-- Custom Js -->
+   <script th:src="@{/js/custom-scripts.js}"></script>
+    
+   
+</body>
+</html>

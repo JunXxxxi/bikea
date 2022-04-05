@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>共享单车数据可视化分析系统</title>
+	<!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <style>
+        p{ margin:0 auto}
+        /* 设置p上下距离为0，左右自动 */
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index2.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+        <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+            <div class="sidebar-collapse">
+                <ul class="nav" >
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="index2.html">单车概况</a>
+                            </li>
+                            <li>
+                                <a href="table2.html">单车分布</a>
+                            </li>
+                            <li>
+                                <a href="form2.html">高峰期分析</a>
+                            </li>
+                            <li>
+                                <a href="analyse2.html">单车数据分析</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="newold2.html">用户概况</a>
+                            </li>
+                            <li>
+                                <a href="personas2.html">用户画像</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="order22.html">订单详情</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="response2.html">用户反馈</a>
+                            </li>
+                            <li>
+                                <a href="warn2.html">警示信息</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+    </div>
+        <!-- /. NAV SIDE  -->
+        
+        <div id="page-wrapper" >
+            <div class="row">
+                <div  style="float: right;margin-top:0">
+                    <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black">武汉</span></button>
+                    <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black"><span style="color: black">北京</span></span></button>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Personas <small>Nice Customer Portrait</small>
+                        </h1>
+                    </div>
+                </div> 
+            <div id="page-inner">
+                                 
+
+                    <!-- /. ROW  -->
+            <div class="row">
+                <div class="layui-tab layui-tab-card">
+
+                    <div class="layui-tab-content">
+                <div class="col-md-12">
+                        <div class="panel-body">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-heading" >
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 活跃用户 </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse in" style="height: auto;">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-4 col-sm-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">
+                                                            Customer #1
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <p>●&nbsp;&nbsp;&nbsp;&nbsp;性别：男</p>
+                                                            <p>●&nbsp;&nbsp;&nbsp;&nbsp;年龄段：18~24岁</p>
+                                                            <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月骑行次数：11~20次</p>
+                                                            <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行里程：2~4km</p>
+                                                            <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行时间：10~30min</p>
+                                                            <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月消费：￥10~30</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">
+                                                        Customer #2
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;性别：女</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;年龄段：18~24岁</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月骑行次数：6~10次</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行里程：0~2km</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行时间：5~20min</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月消费：￥5~15</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-heading" >
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> 潜在用户 </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse in" style="height: auto;">
+                                        <div class="panel-body">
+                                            <div class="col-md-4 col-sm-4" >
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        Customer #3
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;性别：男</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;年龄段：0~17岁</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月骑行次数：6~10次</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行里程：0~1km</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行时间：0~5min</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月消费：￥0~10</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="panel panel-success">
+                                                    <div class="panel-heading">
+                                                        Customer #4
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;性别：女</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;年龄段：0~17岁</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月骑行次数：0~5次</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行里程：0~1km</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行时间：0~5min</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月消费：￥0~10</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-heading" >
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"> 沉睡用户 </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse in">
+                                        <div class="panel-body">
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="panel panel-danger">
+                                                    <div class="panel-heading">
+                                                        Customer #5
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;性别：女</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;年龄段：25~34岁</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月骑行次数：0~10次</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行里程：0~2km</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行时间：0~30min</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月消费：￥5~15</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">
+                                                        Customer #6
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;性别：男</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;年龄段：35+岁</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月骑行次数：0~10次</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行里程：0~2km</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行时间：5~30min</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月消费：￥0~15</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="panel panel-warning">
+                                                    <div class="panel-heading">
+                                                        Customer #7
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;性别：女</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;年龄段：35+岁</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月骑行次数：0~5次</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行里程：0~1km</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;单次骑行时间：0~10min</p>
+                                                        <p>●&nbsp;&nbsp;&nbsp;&nbsp;每月消费：￥0~10</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-6 col-sm-6">-->
+<!--                                    <div class="panel panel-default">-->
+<!--                                        <div class="panel-heading">-->
+<!--                                            数据分析-->
+<!--                                        </div>-->
+<!--                                        <div class="panel-body">-->
+<!--                                            <ul class="nav nav-tabs">-->
+<!--                                                <li class="active"><a href="#home" data-toggle="tab">方案1</a>-->
+<!--                                                </li>-->
+<!--                                                <li class=""><a href="#profile" data-toggle="tab">方案2</a>-->
+<!--                                                </li>-->
+<!--                                                <li class=""><a href="#messages" data-toggle="tab">方案3</a>-->
+<!--                                                </li>-->
+<!--                                                <li class=""><a href="#settings" data-toggle="tab">方案4</a>-->
+<!--                                                </li>-->
+<!--                                            </ul>-->
+
+<!--                                            <div class="tab-content">-->
+<!--                                                <div class="tab-pane fade active in" id="home">-->
+<!--                                                    <h4>方案1</h4>-->
+<!--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--                                                </div>-->
+<!--                                                <div class="tab-pane fade" id="profile">-->
+<!--                                                    <h4>方案2</h4>-->
+<!--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--                                                </div>-->
+<!--                                                <div class="tab-pane fade" id="messages">-->
+<!--                                                    <h4>方案3</h4>-->
+<!--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--                                                </div>-->
+<!--                                                <div class="tab-pane fade" id="settings">-->
+<!--                                                    <h4>方案4</h4>-->
+<!--                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                </div>
+
+
+            </div>
+                    <!-- /. ROW  -->
+
+                
+            </div>
+                 
+				<footer><p>Copyright &copy; 2016.Company name All rights reserved.</footer>
+					</div>
+			 <!-- /. PAGE INNER  -->
+            </div>
+            </div>
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+      <!-- Bootstrap Js -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Metis Menu Js -->
+    <script th:src="@{/js/jquery.metisMenu.js}"></script>
+      <!-- Custom Js -->
+    <script th:src="@{/js/custom-scripts.js}"></script>
+
+    <script type="text/javascript">
+        window.onload=function(){
+            document.getElementById("button2").style.background="#24c2ce";
+        }
+    </script>
+
+    <script type="text/javascript">
+        function change() {
+
+            document.getElementById("button1").style.background="#24c2ce";
+            document.getElementById("button2").style.background="#D3D3D3";
+            window.location.href="personas.html";
+        }
+
+        function change2() {
+            document.getElementById("button1").style.background="#D3D3D3";
+            document.getElementById("button2").style.background="#24c2ce";
+        }
+    </script>
+    
+   
+</body>
+</html>

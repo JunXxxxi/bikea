@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+	<!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <style type="text/css">
+         #page-wrapper{
+            min-height: 500px;
+
+         }
+         #page-inner{
+            min-height: 640px;
+         }
+         @media(min-width:768px) {
+     #page-wrapper{
+               margin: 0 0 0 0px;
+        padding: 15px 30px;
+        
+               min-height: 500px;
+        
+    }
+    .top-navbar .navbar-brand:hover { 
+        background:none;
+        color:#000000;
+    }
+    .top-navbar .navbar-brand {
+    color: #fff;
+    width: 260px;
+    text-align: left;
+    height: 60px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 30px;
+    background:none;
+    }
+
+   </style>
+</head>
+<body>
+   <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+            </div>
+        </nav>
+        
+
+       
+        <!--/. NAV TOP  -->
+        
+    </div>
+        <!-- /. NAV SIDE  -->
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+    			 <div class="row" style="margin-top: 20px">
+                    <div class="col-md-15">
+                        <div class="col-md-5" style="margin-left:70px" > 
+                            <img th:src="@{/images/bike2_4.png}" style="width:100%;height: 100%;margin-top:12px">
+                        </div>
+
+                        <div class="col-md-5" style="margin-left:120px;margin-top: 10px" >
+                            <h2>运行时间和利润-分类线性回归图 </h2>
+                            <p>消费情况可视化</p>
+                            <p>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp线性回归是利用数理统计中回归分析，来确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。回归分析中，只包括一个自变量（运行时间）和一个因变量（利润），且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。</p>
+                            <p>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp从可视化的图表来看，不管单车的状态是正常还是损坏，其利润都与运行时间成正比，且损坏单车斜率更大，说明用户骑行相同的时间里更换损坏单车的次数比正常单车更多。
+                            </p>
+                        </div>
+                        
+                        <div style="width:100px;height: 100px;position: absolute;top: 30px;left: 1430px">
+                            <a href="javascript:history.back(-1)" >
+                                <i class="fa fa-reply" style="font-size: 50px;color: #FF8C00"></i>      
+                            </a>
+                        </div>
+
+                        
+                    </div>
+                </div> 
+
+               
+                 <!-- /. ROW  -->
+				 
+				
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+
+
+
+
+
+
+
+
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+   <script th:src="@{/js/jquery-1.10.2.js}"></script>
+   <!-- Bootstrap Js -->
+   <script th:src="@{/js/bootstrap.min.js}"></script>
+   <!-- Metis Menu Js -->
+   <script th:src="@{/js/jquery.metisMenu.js}"></script>
+   <!-- Custom Js -->
+   <script th:src="@{/js/custom-scripts.js}"></script>
+    
+   
+</body>
+</html>

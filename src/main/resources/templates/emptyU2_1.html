@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+	<!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <style type="text/css">
+         #page-wrapper{
+            min-height: 500px;
+
+         }
+         #page-inner{
+            min-height: 640px;
+         }
+         @media(min-width:768px) {
+     #page-wrapper{
+               margin: 0 0 0 0px;
+        padding: 15px 30px;
+        
+               min-height: 500px;
+        
+    }
+    .top-navbar .navbar-brand:hover { 
+        background:none;
+        color:#000000;
+    }
+    .top-navbar .navbar-brand {
+    color: #fff;
+    width: 260px;
+    text-align: left;
+    height: 60px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 30px;
+    background:none;
+    }
+
+   </style>
+</head>
+<body>
+   <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+            </div>
+        </nav>
+        
+
+       
+        <!--/. NAV TOP  -->
+        
+    </div>
+        <!-- /. NAV SIDE  -->
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+    			 <div class="row" style="margin-top: 20px">
+                    <div class="col-md-15">
+                        <div class="col-md-5" style="margin-left:70px" > 
+                            <img th:src="@{/images/user2_1.png}" style="width:100%;height: 100%;margin-top:12px">
+                        </div>
+
+                        <div class="col-md-5" style="margin-left:120px;margin-top: 10px" >
+                            <h2> 消费情况-箱式图 </h2>
+                            <p>消费情况可视化——多维度对用户聚类后，对5种类型用户的消费情况进行分析。</p>
+                            <p>1.识别数据中的异常值(离群点)：<br>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp从箱式图结构来看，分布在上边缘以上和下边缘以下的菱形点为异常值。图中异常值较少，因此分析的样本是有效的。
+                            </p>
+                            <p>2.判断数据分布，了解分布状态：<br>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp从可视化的图表来看，同一数轴上，几类用户数据的箱线图并行排列，中位数、尾长、异常值、分布区间等形状信息便昭然若揭。可以看到不同类型的用户消费水平分布，其消费水平上限与下限差异较为明显，不同类型的用户消费波动较小，且不同类型用户的数量分布也有所不同。
+                            </p>
+                        </div>
+                        
+                        <div style="width:100px;height: 100px;position: absolute;top: 30px;left: 1430px">
+                            <a href="javascript:history.back(-1)" >
+                                <i class="fa fa-reply" style="font-size: 50px;color: #FF8C00"></i>      
+                            </a>
+                        </div>
+
+                        
+                    </div>
+                </div> 
+
+               
+                 <!-- /. ROW  -->
+				 
+				
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+
+
+
+
+
+
+
+
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+      <!-- Bootstrap Js -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Metis Menu Js -->
+    <script th:src="@{/js/jquery.metisMenu.js}"></script>
+      <!-- Custom Js -->
+    <script th:src="@{/js/custom-scripts.js}"></script>
+    
+   
+</body>
+</html>

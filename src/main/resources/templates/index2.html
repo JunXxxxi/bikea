@@ -75,16 +75,16 @@
                     <a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="index.html">单车概况</a>
+                            <a href="index2.html">单车概况</a>
                         </li>
                         <li>
-                            <a href="bike_detail.html">单车详情</a>
+                            <a href="bike_detail2.html">单车详情</a>
                         </li>
                         <li>
-                            <a href="bike_dist.html">单车分布与高峰期分析</a>
+                            <a href="bike_dist2.html">单车分布与高峰期分析</a>
                         </li>
                         <li>
-                            <a href="analyseB1.html">单车数据分析</a>
+                            <a href="analyseB2.html">单车数据分析</a>
                         </li>
                     </ul>
                 </li>
@@ -93,13 +93,13 @@
                     <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="newold.html">用户概况</a>
+                            <a href="newold2.html">用户概况</a>
                         </li>
                         <li>
-                            <a href="personas.html">用户画像</a>
+                            <a href="personas2.html">用户画像</a>
                         </li>
                         <li>
-                            <a href="analyseU1.html">用户数据分析</a>
+                            <a href="analyseU2.html">用户数据分析</a>
                         </li>
                     </ul>
                 </li>
@@ -108,7 +108,7 @@
                     <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="order2.html">订单详情</a>
+                            <a href="order22.html">订单详情</a>
                         </li>
 
                     </ul>
@@ -118,10 +118,10 @@
                     <a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="response.html">用户反馈</a>
+                            <a href="response2.html">用户反馈</a>
                         </li>
                         <li>
-                            <a href="warn.html">警示信息</a>
+                            <a href="warn2.html">警示信息</a>
                         </li>
 
                     </ul>
@@ -137,8 +137,8 @@
     <div id="page-inner">
         <div class="row">
             <div  style="float: right;margin-top:0">
-                <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black">武汉</span></button>
-                <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black"><span style="color: black">北京</span></span></button>
+                <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black">武汉</span></button>
+                <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black"><span style="color: black">北京</span></span></button>
             </div>
         </div>
 
@@ -168,7 +168,7 @@
                 <div class="col-md-3">
                     <div class="pricing-table-grid" >
                         <div class="plans_head" style="height: 150px;background: #9DC3E6;">
-                            <h4 class="m_4" style="margin-left:-120px" th:text="${total}"><small class="m_2"></small>8231<small  class="m_3"></small></h4>
+                            <h4 class="m_4" style="margin-left:-120px" th:text="${total2}"><small class="m_2"></small>8231<small  class="m_3"></small></h4>
                             <h3 style="margin-top:25px;margin-left: 20px">单车总数 </h3>
                             <div style="margin-top:-40px;margin-right: -40px">
                                 <i class="fa fa-search" style="font-size: 80px;color: #f0e6e9"></i>
@@ -183,7 +183,7 @@
                 <div class="col-md-3">
                     <div class="pricing-table-grid">
                         <div class="plans_head" style="height: 150px;background:#8ee4d0;">
-                            <h4 class="m_4" style="margin-left:-120px" th:text="${normal}"><small class="m_2"></small>2343<small  class="m_3"></small></h4>
+                            <h4 class="m_4" style="margin-left:-120px" th:text="${normal2}"><small class="m_2"></small>2343<small  class="m_3"></small></h4>
                             <h3 style="margin-top:25px;margin-left: 20px">正常单车数 </h3>
                             <div style="margin-top:-40px;margin-right: -40px">
                                 <i class="fa fa-check-square-o" style="font-size: 80px;color: #f0e6e9"></i>
@@ -198,7 +198,7 @@
                 <div class="col-md-3">
                     <div class="pricing-table-grid">
                         <div class="plans_head" style="height: 150px;background: #f8c89f">
-                            <h4 class="m_4" style="margin-left:-120px" th:text="${broken}"><small class="m_2"></small>3042<small  class="m_3"></small></h4>
+                            <h4 class="m_4" style="margin-left:-120px" th:text="${broken2}"><small class="m_2"></small>3042<small  class="m_3"></small></h4>
                             <h3 style="margin-top:25px;margin-left: 20px">故障单车数 </h3>
                             <div style="margin-top:-40px;margin-right: -40px">
                                 <i class="fa fa-cogs" style="font-size: 80px;color: #f0e6e9"></i>
@@ -213,7 +213,7 @@
                 <div class="col-md-3">
                     <div class="pricing-table-grid">
                         <div class="plans_head" style="height: 150px;background:#49CFAE">
-                            <h4 class="m_4" style="margin-left:-120px" th:text="${miss}"><small class="m_2"></small>1209<small  class="m_3"></small></h4>
+                            <h4 class="m_4" style="margin-left:-120px" th:text="${miss2}"><small class="m_2"></small>1209<small  class="m_3"></small></h4>
                             <h3 style="margin-top:25px;margin-left: 20px">丢失单车数 </h3>
                             <div style="margin-top:-40px;margin-right: -40px">
                                 <i class="fa fa-cloud" style="font-size: 80px;color: #f0e6e9"></i>
@@ -326,9 +326,9 @@
 <script type="text/javascript">
 
     function myFunction1(){
-        var brokenList=[[${hisB}]];
-        var missList=[[${hisM}]];
-        var normalList=[[${hisN}]];
+        var brokenList=[[${hisB2}]];
+        var missList=[[${hisM2}]];
+        var normalList=[[${hisN2}]];
         var option = {
 
             tooltip: {
@@ -426,8 +426,8 @@
 
 <script type="text/javascript">
     function myFunction2(){
-        var numUse = [[${numU}]];
-        var numNoUse = [[${numNU}]];
+        var numUse = [[${numU2}]];
+        var numNoUse = [[${numNU2}]];
 
         var option2 = {
 
@@ -507,22 +507,19 @@
 
 </script>
 
-<script type="text/javascript">
-
-</script>
 
 
-<script type="text/javascript">
+        <script type="text/javascript">
             window.onload=function(){
-                document.getElementById("button1").style.background="#24c2ce";
-                document.getElementById('l1').click();
+                document.getElementById("button2").style.background="#24c2ce";
+                document.getElementById('l1').click()
 
-                $("#11").css("width","[[${perN}]]")
-                $("#22").css("width","[[${perB}]]")
-                $("#33").css("width","[[${perM}]]")
-                $("#1").html("[[${t1}]]")
-                $("#2").html("[[${t2}]]")
-                $("#3").html("[[${t3}]]")
+                $("#11").css("width","[[${perN2}]]")
+                $("#22").css("width","[[${perB2}]]")
+                $("#33").css("width","[[${perM2}]]")
+                $("#1").html("[[${t12}]]")
+                $("#2").html("[[${t22}]]")
+                $("#3").html("[[${t32}]]")
             }
         </script>
 
@@ -531,17 +528,14 @@
 
                 document.getElementById("button1").style.background="#24c2ce";
                 document.getElementById("button2").style.background="#D3D3D3";
-
+                window.location.href="index.html";
             }
 
             function change2() {
                 document.getElementById("button1").style.background="#D3D3D3";
                 document.getElementById("button2").style.background="#24c2ce";
-                window.location.href="index2.html";
             }
         </script>
-
-
 
     </body>
 

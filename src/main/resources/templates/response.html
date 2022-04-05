@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>共享单车数据可视化分析系统</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />   
+    <link rel="stylesheet" th:href="@{/css/morris.css}" type="text/css"/>
+<!-- Graph CSS -->
+<!-- jQuery -->
+    <script th:src="@{/js/jquery-2.1.4.min.js}"></script>
+<!-- //jQuery -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <style style="text/css">
+        #page-inner {
+            width:100%;
+            margin:10px 20px 10px 0px;
+            background-color:transparent;
+            padding:10px;
+            min-height:900px;
+        }
+        .inbox-mail{
+        padding: 1em 0;
+        }
+        .compose.w3layouts {
+        padding-left: 0;
+        }
+        .compose.w3layouts {
+        padding: 0;
+        }
+        .compose h2{
+            font-size: 1.2em;
+            color: #fff;
+            background: #1b93e1;
+            text-align: center;
+            padding: 10px;
+            margin:0;
+        }
+        .nav-sidebar ul li a span{
+    color: #fff;
+    font-size: 0.8em;
+    background:#e74c3c;
+    border-radius: 10px;
+    width: 25px;
+    height: 18px;
+    display: inline-block;
+    line-height: 1.7em;
+    text-align: center;
+    float: right;
+}
+        nav.nav-sidebar {
+    margin: 1em 0;
+    background: #fff;
+    border: 1px solid #ebeff6;
+   box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -o-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.tabs  li a{
+    padding:1em;
+    color:#000000;
+}
+.tabs  li a:hover{
+    background:#ff9501 !important;
+    color:#fff;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}   
+.table-row td{
+    font-size: 1em;
+        padding: 15px 8px 15px !important;
+     line-height: 1.42857143;
+    vertical-align:middle !important; 
+    border-top: 1px solid #ddd;
+}
+tr.table-row:hover{
+    background:#FAFAFA;
+}
+tr.table-row {
+    border-top: 1px solid #F3F3F4;
+}
+.table-row td{
+    font-size: 1em;
+        padding: 15px 8px 15px !important;
+     line-height: 1.42857143;
+    vertical-align:middle !important; 
+    border-top: 1px solid #ddd;
+}
+.table-img img{
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -o-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+}
+.table-img img {
+    width: 40px;
+}
+td.table-text h6{
+    font-size: 1.2em;
+    color:#000;
+}
+td.table-text p{
+    font-size:0.9em;
+    line-height: 1.5em;
+    color:#999;
+}
+.inbox-right {
+    background-color: #fff;
+    padding: 1.8em;
+    border: 1px solid #ebeff6;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -o-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -o-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.inbox-right {
+    padding: 1em;
+}
+.mail-toolbar .table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 2px!important;
+}
+.mail-toolbar {
+    padding-bottom: 1em;
+}
+.mail-toolbar {
+    padding-bottom: 2em;
+}
+
+    </style>
+<!-- lined-icons -->
+<link rel="stylesheet" th:href="@{/css/icon-font.min.css}" type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+            <div class="sidebar-collapse">
+                <ul class="nav" >
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="index.html">单车概况</a>
+                            </li>
+                            <li>
+                                <a href="bike_detail.html">单车详情</a>
+                            </li>
+                            <li>
+                                <a href="bike_dist.html">单车分布与高峰期分析</a>
+                            </li>
+                            <li>
+                                <a href="analyseB1.html">单车数据分析</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="newold.html">用户概况</a>
+                            </li>
+                            <li>
+                                <a href="personas.html">用户画像</a>
+                            </li>
+                            <li>
+                                <a href="analyseU1.html">用户数据分析</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="order2.html">订单详情</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="response.html">用户反馈</a>
+                            </li>
+                            <li>
+                                <a href="warn.html">警示信息</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+    </div>
+        <!-- /. NAV SIDE  -->
+        
+        <div id="page-wrapper" style="margin-bottom: 0">
+            <div class="row">
+                <div  style="float: right;margin-top:0">
+                    <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black">武汉</span></button>
+                    <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black"><span style="color: black">北京</span></span></button>
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Feedback <small> Customer voice</small>
+                        </h1>
+                    </div>
+                </div>
+            <div id="page-inner">
+                <div class="inbox-mail">
+                    <div class="col-md-4 compose w3layouts">
+                        <h2 style="background:#4c4c4c">Compose</h2>
+                        <nav class="nav-sidebar">
+                            <ul class="nav tabs">
+                              <li class="active"><a href="#tab1" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar" style="color:#4c4c4c"></i>收件箱 <span>18</span><div class="clearfix"></div></a></li>
+                                                      
+                            </ul>
+                        </nav>
+                    
+                    <div>
+                    <img th:src="@{/images/cy1.png}"  style="width: 100%;height: 800px">
+                    </div>
+        
+                </div>
+
+<!-- tab content -->
+<div class="col-md-8 tab-content tab-content-in w3">
+<div class="tab-pane text-style active" id="tab1">
+  <div class="inbox-right">
+            
+            <div class="mailbox-content">
+               <div class="mail-toolbar clearfix">
+                 <div class="float-left">
+                   <div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+                             <h2>   客户留言 </h2>
+                   </div>
+                    
+                    
+                        
+                
+                    
+                </div>
+                <div class="float-right">
+
+                            
+                            <div class="btn-group" style="margin-top:10px">
+                                <a class="btn btn-default" a href="#tab1" data-toggle="tab" aria-expanded="true"><i class="fa fa-angle-left"></i></a>
+                                <a class="btn btn-default" a href="#tab2" data-toggle="tab" aria-expanded="true"><i class="fa fa-angle-right"></i></a>
+                            </div>
+                        
+                    
+                </div>
+                
+               </div>
+                <table class="table" style="background:#ffffff">
+                    <tbody>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 李大同</h6>
+                                <p>单车锁不上！！人在汉口很难受</p>
+                            </td>
+                             <td>
+                                汉口
+                            </td>
+                            
+                            <td class="march">
+                               in 5 days 
+                            </td>
+                          
+                             <td>
+                             <i class="fa fa-star-half-o icon-state-warning"></i>
+                                
+                            </td>
+                        </tr>
+                       <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in1.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 张小顶</h6>
+                                <p>最近骑到的单车都是坏的，真是气人！</p>
+                            </td>
+                             <td>
+                                武汉理工大学南湖
+                            </td>
+                           
+                            <td class="march">
+                                in 5 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in2.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 王四聪</h6>
+                                <p>早上从华农骑车到学校，但是单车太少了，因此而迟到过</p>
+                            </td>
+                             <td>
+                                街道口
+                            </td>
+                            
+                            <td class="march">
+                                in 5 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in3.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 罗致乡</h6>
+                                <p>建议多修修单车</p>
+                            </td>
+                             <td>
+                                武汉大学
+                            </td>
+                           
+                            <td class="march">
+                              in 4 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in4.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 王大锤</h6>
+                                <p>单车做的还可以。就是量有点少。五点下班很难有空车</p>
+                            </td>
+                             <td>
+                                街道口
+                            </td>
+                           
+                            <td class="march">
+                                in 4 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in5.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6>张晓晨 </h6>
+                                <p>单车价格有点高啊</p>
+                            </td>
+                             <td>
+                                汉口
+                            </td>
+                           
+                            <td class="march">
+                                in 3 days  
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in6.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 王匆匆</h6>
+                                <p>早上经过这里发现单车轮胎是瘪的</p>
+                            </td>
+                             <td>
+                                街道口
+                            </td>
+                            
+                            <td class="march">
+                               in 2 days  
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in7.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6>潘神羊</h6>
+                                <p>早上7点左右没有单车啊，上课总是因此迟到</p>
+                            </td>
+                             <td>
+                                武汉理工大学南湖
+                            </td>
+                            <td class="march">
+                                in 2 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/in8.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 张丽丽</h6>
+                                <p>希望可以出一种天卡 一天可以无限骑车</p>
+                            </td>
+                            <td>
+                                街道口
+                            </td>
+                            <td class="march">
+                                in 2 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+
+
+
+                       
+                    </tbody>
+                </table>
+               </div>
+            </div>
+</div>
+<div class="tab-pane text-style" id="tab2">
+    <div class="inbox-right">
+            
+            <div class="mailbox-content">
+                <div class="mail-toolbar clearfix">
+                    <div class="float-left">
+                        <div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+                            <h2>   客户留言 </h2>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="float-right">
+
+
+                        <div class="btn-group" style="margin-top:10px">
+                            <a class="btn btn-default" a href="#tab1" data-toggle="tab" aria-expanded="true"><i class="fa fa-angle-left"></i></a>
+                            <a class="btn btn-default" a href="#tab2" data-toggle="tab" aria-expanded="true"><i class="fa fa-angle-right"></i></a>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <table class="table" style="background:#ffffff">
+                    <tbody>
+                    
+                       <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c1.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6>邓明明</h6>
+                                <p>单车坐的屁股疼 建议换个软一点的座凳</p>
+                            </td>
+                            <td>
+                                街道口
+                            </td>
+
+                            <td class="march">
+                                in 5 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c2.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 王金韩</h6>
+                                <p>每天中午放学的时候，这边单车不够啊</p>
+                            </td>
+                            <td>
+                                武汉大学
+                            </td>
+                           
+                            <td class="march">
+                                in 5 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c3.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 潘彤彤</h6>
+                                <p>单车轮胎有些问题 左右摇晃</p>
+                            </td>
+                            <td>
+                                华中农业大学
+                            </td>
+                           
+                            <td class="march">
+                              in 4 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c4.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6>王大屏</h6>
+                                <p>单车价格稍贵</p>
+                            </td>
+                            <td>
+                                街道口
+                            </td>
+                          
+                            <td class="march">
+                                in 4 days 
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c5.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6> 张博通</h6>
+                                <p>单车总体还算可以 希望能更便宜点</p>
+                            </td>
+                            <td>
+                                街道口
+                            </td>
+                          
+                            <td class="march">
+                                in 3 days  
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c6.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6>王灿灿</h6>
+                                <p>希望单车问题少一点 晚上下班回家很麻烦</p>
+                            </td>
+                            <td>
+                                武汉音乐学院
+                            </td>
+                          
+                            <td class="march">
+                               in 2 days  
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c7.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6>李露露</h6>
+                                <p>早上车辆太少咯 经常找不到车</p>
+                            </td>
+                            <td>
+                                武汉音乐学院
+                            </td>
+                          
+                            <td class="march">
+                               in 3 days  
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c8.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6>冯吉平</h6>
+                                <p>单车故障问题严重 不是一次两次了</p>
+                            </td>
+                            <td>
+                                佰港城
+                            </td>
+                          
+                            <td class="march">
+                               in 2 days  
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-img">
+                               <img th:src="@{/images/c9.jpg}" alt="">
+                            </td>
+                            <td class="table-text">
+                                <h6>郑重</h6>
+                                <p>单车脚踏经常坏掉 </p>
+                            </td>
+                            <td>
+                                湖北省图书馆
+                            </td>
+                          
+                            <td class="march">
+                               in 2 days  
+                            </td>
+                          
+                             <td>
+                               <i class="fa fa-star-half-o icon-state-warning"></i>
+                            </td>
+                        </tr>
+
+                      
+                    </tbody>
+                </table>
+               </div>
+            </div>
+</div>
+
+ 
+</div>
+            
+             
+                    <!-- /. ROW  -->
+            
+              
+           
+
+                
+           
+             <!-- /. PAGE INNER  -->
+        </div>
+         <!-- /. PAGE WRAPPER  -->
+     </div>
+
+
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+      <!-- Bootstrap Js -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Metis Menu Js -->
+
+      <!-- Custom Js -->
+
+        </div>
+
+    <script type="text/javascript">
+        window.onload=function(){
+            document.getElementById("button1").style.background="#24c2ce";
+        }
+    </script>
+
+    <script type="text/javascript">
+        function change() {
+
+            document.getElementById("button1").style.background="#24c2ce";
+            document.getElementById("button2").style.background="#D3D3D3";
+
+        }
+
+        function change2() {
+            document.getElementById("button1").style.background="#D3D3D3";
+            document.getElementById("button2").style.background="#24c2ce";
+            window.location.href="response2.html";
+        }
+    </script>
+</body>
+</html>

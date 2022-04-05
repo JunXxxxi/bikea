@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>共享单车数据可视化分析系统</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome-animation.css}" />
+     <!-- Google Fonts-->
+   <link href='#css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <style>
+        p{ margin:0 }
+        .img_div {
+            
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(38,38,38,0.9);
+            color: #ffffff;
+            opacity: 0;
+        }
+        .mask i {
+            margin-left: 45%;
+            margin-top:32%
+        }
+
+        .img_div a:hover .mask {
+            opacity: 1;
+            -webkit-transition: opacity 0.5s;
+            -moz-transition:opacity 0.5s;
+            -o-transition:opacity 0.5s;
+            -ms-transition:opacity 0.5s;
+             transition:opacity 0.5s; 
+        }
+        .psy{
+            width:100%;
+            height: 34px;
+            margin-top:0px;
+            text-align: center;
+            background:#000000;
+            color: #ffffff
+        }
+        
+    </style>
+    <style type="text/css">
+        #page-inner{
+            min-height: 595px
+        }
+        #page-wrapper{
+            min-height: 595px
+        }
+        .animated {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both; }
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0; }
+            to {
+                opacity: 1; } }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0; }
+            to {
+                opacity: 1; } }
+
+        .fadeIn {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn; }
+
+    </style>
+</head>
+<body>
+    
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong style="font-size: 15px">共享单车数据可视化分析系统</strong></a>
+            </div>
+
+            
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+            <div class="sidebar-collapse">
+                <ul class="nav" >
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="index.html">单车概况</a>
+                            </li>
+                            <li>
+                                <a href="bike_detail.html">单车详情</a>
+                            </li>
+                            <li>
+                                <a href="bike_dist.html">单车分布与高峰期分析</a>
+                            </li>
+                            <li>
+                                <a href="analyseB1.html">单车数据分析</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="newold.html">用户概况</a>
+                            </li>
+                            <li>
+                                <a href="personas.html">用户画像</a>
+                            </li>
+                            <li>
+                                <a href="analyseU1.html">用户数据分析</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="order2.html">订单详情</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="response.html">用户反馈</a>
+                            </li>
+                            <li>
+                                <a href="warn.html">警示信息</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+    </div>
+        <!-- /. NAV SIDE  -->
+        
+        <div id="page-wrapper" >
+            <div class="row">
+                <div  style="float: right;margin-top:0">
+                    <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black">武汉</span></button>
+                    <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black"><span style="color: black">北京</span></span></button>
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Analysis <small>Bike data</small>
+                        </h1>
+                    </div>
+            </div>
+
+            <div class="animated fadeIn">
+            <div id="page-inner">
+                                 
+
+                    <!-- /. ROW  -->
+                 <div class="row">
+                <div class="layui-tab layui-tab-card">
+
+                    <div class="layui-tab-content">
+                <div class="col-md-12">
+                        <div class="panel-body">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="text-align: center;">
+                                        <strong style="font-size: 25px">单车数据挖掘展示</strong>
+                                        <p style="margin-top: 30px;font:normal 15px arial,sans-serif;color: #696969;margin-bottom:40px">基于单车的使用情况进行数据分析并可视化展示
+                                        
+                                       
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse in" style="height: auto;">
+                                        <div class="panel-body" >
+                                            <div class="row">
+                                            <div class="col-md-5" style="margin-left: 6% ">
+                                               <div class="img_div" >
+                                                   <img th:src="@{/images/bike1_1.png}" style="width:100%;height: 100%">
+                                                
+                                                    <div style="width: 100%;height: 60px;line-height: 50px;z-index: 200;position: absolute;background:#808080;text-align: center;top:225px;opacity: 0.6">
+                                                        <p style="color:#ffffff;font-size: 25px">单车使用次数-卡方分布拟合</p>
+                                                    </div>
+                                                    <a href="emptyB1_1.html">
+                                                        <div class="mask" style="z-index: 200;margin-top:10px;text-align: center">
+
+                                                            <i class="fa fa-search" style="font-size: 50px;margin-right: 50%"></i>
+                                                            <p style="color:#ffffff;font-size: 25px;margin-top:21px">单车使用次数-卡方分布拟合</p>
+                                                        </div>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="col-md-5" style="margin-left:6%">
+                                                    <div class="img_div" >
+                                                       <img th:src="@{/images/bike1_5.png}" style="width:100%;height: 100%">
+                                                        <div style="width: 100%;height: 60px;line-height: 50px;z-index: 200;position: absolute;background:#808080;text-align: center;top:225px;opacity: 0.6">
+                                                            <p style="color:#ffffff;font-size: 25px">每天平均使用次数和利润-核密度估计图</p>
+                                                        </div>
+                                                        <a href="emptyB1_5.html">
+                                                            <div class="mask" style="z-index: 200;margin-top:10px;text-align: center">
+
+                                                                <i class="fa fa-search" style="font-size: 50px;margin-right: 50%"></i>
+                                                                <p style="color:#ffffff;font-size: 25px;margin-top:21px">每天平均使用次数和利润-核密度估计图</p>
+                                                            </div>
+                                                        </a>
+
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                            <div class="row">
+                                            <div class="col-md-5" style="margin-left:6%">
+                                                    <div class="img_div" >
+                                                       <img th:src="@{/images/bike1_3.png}" style="width:100%;height: 100%">
+                                                        <div style="width: 100%;height: 60px;line-height: 50px;z-index: 200;position: absolute;background:#808080;text-align: center;top:225px;opacity: 0.6">
+                                                            <p style="color:#ffffff;font-size: 25px">使用次数和平均每天使用次数-散点图</p>
+                                                        </div>
+                                                        <a href="emptyB1_3.html">
+                                                            <div class="mask" style="z-index: 200;margin-top:10px;text-align: center">
+
+                                                                <i class="fa fa-search" style="font-size: 50px;margin-right: 50%"></i>
+                                                                <p style="color:#ffffff;font-size: 25px;margin-top:21px">使用次数和平均每天使用次数-散点图</p>
+                                                            </div>
+                                                        </a>
+
+                                                    </div>
+                                            </div>
+
+                                            <div class="col-md-5" style="margin-left:6%">
+                                                    <div class="img_div" >
+                                                       <img th:src="@{/images/bike1_6.png}" style="width:100%;height: 100%">
+                                                        <div style="width: 100%;height: 60px;line-height: 50px;z-index: 200;position: absolute;background:#808080;text-align: center;top:225px;opacity: 0.6">
+                                                            <p style="color:#ffffff;font-size: 25px">利润-竖直分类散点图</p>
+                                                        </div>
+                                                        <a href="emptyB1_6.html">
+                                                            <div class="mask" style="z-index: 200;margin-top:10px;text-align: center">
+
+                                                                <i class="fa fa-search" style="font-size: 50px;margin-right: 50%"></i>
+                                                                <p style="color:#ffffff;font-size: 25px;margin-top:21px">利润-竖直分类散点图</p>
+                                                            </div>
+                                                        </a>
+
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5" style="margin-left:6%;margin-top:70px">
+                                                    <div class="img_div" >
+                                                       <img th:src="@{/images/bike1_4.png}" style="width:100%;height: 100%">
+                                                        <div style="width: 100%;height: 60px;line-height: 50px;z-index: 200;position: absolute;background:#808080;text-align: center;top:255px;opacity: 0.6">
+                                                            <p style="color:#ffffff;font-size: 25px">运行时间和利润-分类线性回归图</p>
+                                                        </div>
+                                                        <a href="emptyB1_4.html">
+                                                            <div class="mask" style="z-index: 200;margin-top:10px;text-align: center">
+
+                                                                <i class="fa fa-search" style="font-size: 50px;margin-right: 50%;margin-top:40%"></i>
+                                                                <p style="color:#ffffff;font-size: 25px;margin-top:18px">运行时间和利润-分类线性回归图</p>
+                                                            </div>
+                                                        </a>
+
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-5" style="margin-left:6%">
+                                                    <div class="img_div" >
+                                                       <img th:src="@{/images/bike1_2.png}" style="width:100%;height: 100%">
+                                                        <div style="width: 100%;height: 60px;line-height: 50px;z-index: 200;position: absolute;background:#808080;text-align: center;top:325px;opacity: 0.6">
+                                                            <p style="color:#ffffff;font-size: 25px">运行时间和使用次数-核密度图</p>
+                                                        </div>
+                                                        <a href="emptyB1_2.html">
+                                                            <div class="mask" style="z-index: 200;margin-top:10px;text-align: center">
+
+                                                                <i class="fa fa-search" style="font-size: 50px;margin-right: 50%;margin-top:40%"></i>
+                                                                <p style="color:#ffffff;font-size: 25px;margin-top:87px">运行时间和使用次数-核密度图</p>
+                                                            </div>
+                                                        </a>
+
+                                                    </div>
+                                            </div>
+
+                                            
+                                        </div>
+                                                     
+                                            </div>
+                                    </div>
+                                </div>
+
+
+
+                                
+                        </div>
+
+
+                </div>
+
+
+            </div>
+                    
+
+
+                </div>
+            
+            </div>
+
+                
+     
+                 
+                <footer><p>Copyright &copy; 2020.Company name All rights reserved.</footer>
+        </div>
+
+        <script th:src="@{/js/jquery-1.10.2.js}"></script>
+        <!-- Bootstrap Js -->
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <!-- Metis Menu Js -->
+        <script th:src="@{/js/jquery.metisMenu.js}"></script>
+        <!-- Custom Js -->
+        <script th:src="@{/js/custom-scripts.js}"></script>
+        <script th:src="@{/js/echarts.js}"></script>
+
+
+                <script type="text/javascript">
+                    window.onload=function(){
+                        document.getElementById("button1").style.background="#24c2ce";
+                    }
+                </script>
+
+                <script type="text/javascript">
+                    function change() {
+
+                        document.getElementById("button1").style.background="#24c2ce";
+                        document.getElementById("button2").style.background="#D3D3D3";
+
+                    }
+
+                    function change2() {
+                        document.getElementById("button1").style.background="#D3D3D3";
+                        document.getElementById("button2").style.background="#24c2ce";
+                        window.location.href="analyseB2.html";
+                    }
+                </script>
+    
+
+</div>
+            </div>
+        </div>
+</body>
+</html>
+
+
+
+

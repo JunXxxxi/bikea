@@ -45,7 +45,6 @@
         animation-name: fadeIn; }
 
 </style>
-
 <body>
 <div id="wrapper">
     <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -69,16 +68,16 @@
                     <a href="#"><i class="fa fa-sitemap"></i> 单车分析<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="index.html">单车概况</a>
+                            <a href="index2.html">单车概况</a>
                         </li>
                         <li>
-                            <a href="bike_detail.html">单车详情</a>
+                            <a href="bike_detail2.html">单车详情</a>
                         </li>
                         <li>
-                            <a href="bike_dist.html">单车分布与高峰期分析</a>
+                            <a href="bike_dist2.html">单车分布与高峰期分析</a>
                         </li>
                         <li>
-                            <a href="analyseB1.html">单车数据分析</a>
+                            <a href="analyseB2.html">单车数据分析</a>
                         </li>
                     </ul>
                 </li>
@@ -87,13 +86,13 @@
                     <a href="#"><i class="fa fa-sitemap"></i> 用户分析<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="newold.html">用户概况</a>
+                            <a href="newold2.html">用户概况</a>
                         </li>
                         <li>
-                            <a href="personas.html">用户画像</a>
+                            <a href="personas2.html">用户画像</a>
                         </li>
                         <li>
-                            <a href="analyseU1.html">用户数据分析</a>
+                            <a href="analyseU2.html">用户数据分析</a>
                         </li>
                     </ul>
                 </li>
@@ -102,7 +101,7 @@
                     <a href="#"><i class="fa fa-sitemap"></i> 订单分析<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="order2.html">订单详情</a>
+                            <a href="order22.html">订单详情</a>
                         </li>
 
                     </ul>
@@ -112,10 +111,10 @@
                     <a href="#"><i class="fa fa-sitemap"></i> 反馈与预警<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="response.html">用户反馈</a>
+                            <a href="response2.html">用户反馈</a>
                         </li>
                         <li>
-                            <a href="warn.html">警示信息</a>
+                            <a href="warn2.html">警示信息</a>
                         </li>
 
                     </ul>
@@ -131,8 +130,8 @@
 <div id="page-wrapper" >
     <div class="row">
         <div  style="float: right;margin-top:0">
-            <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black">武汉</span></button>
-            <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black"><span style="color: black">北京</span></span></button>
+            <button type="button" class="btn-sm btn"  id="button1"  onclick="change()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#D3D3D3;"><span style="color: black">武汉</span></button>
+            <button type="button" class="btn-sm btn"  id="button2"  onclick="change2()" style="border-radius: 50px;outline: none;width:60px;height: 32px;border: none;background-color:#24c2ce;"><span style="color: black"><span style="color: black">北京</span></span></button>
         </div>
     </div>
     <div class="row">
@@ -152,11 +151,11 @@
                     </div>
                     <div style="height: 200px">
                         <img th:src="@{/images/kenan1.jpg}" style="height: 170px">
-                        <h2 style="margin-left:60%;margin-top:-35%" th:text="${perM}"></h2>
+                        <h2 style="margin-left:60%;margin-top:-35%" th:text="${perM2}"></h2>
                     </div>
                     <div>
                         <img th:src="@{/images/kenan2.jpg}" style="height: 170px">
-                        <h2 style="margin-left:60%;margin-top:-35%" th:text="${perF}"></h2>
+                        <h2 style="margin-left:60%;margin-top:-35%" th:text="${perF2}"></h2>
                     </div>
                 </div>
                 <div class="col-md-6" style="height: 430px">
@@ -174,7 +173,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="col-md-3" style="height: 100%">
                     <div style="text-align: center">
@@ -257,7 +255,7 @@
         },
         series: [{
             name:'用户数量',
-            data: [6820, 6932, 7001, 7334, 9290, 9530, 9620],
+            data: [6588, 6800, 7100, 7490, 7890,8000,8200],
             type: 'line',
             areaStyle: {},
             smooth:true,
@@ -275,7 +273,7 @@
 </script>
 
 <script type="text/javascript">
-    var numAge = [[${numA}]];
+    var numAge = [[${numA2}]];
     var option = {
         tooltip: {
             trigger: 'item',
@@ -310,9 +308,7 @@
 
 
 <script type="text/javascript">
-    // 从后端获取每月单车骑行里程的统计数据
-    var numDist = [[${numD}]];
-    // ECharts图表展示统计信息
+    var numDist = [[${numD2}]];
     var option = {
         title:{
             text:'平均骑行里程分布',
@@ -323,7 +319,6 @@
                 fontWeight:'normal'
             }
         },
-        // 位置信息设置
         grid: {
             left: '3%',
             right: '4%',
@@ -336,10 +331,10 @@
                 type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             }
         },
-        // x轴设置
         xAxis: {
             type: 'category',
             data: ['0-1km', '1-2km', '2-3km', '3-4km', '4-5km', '5+km'],
+
         },
         yAxis: {
             type: 'value',
@@ -362,7 +357,7 @@
 
 </script>
 <script type="text/javascript">
-    var numTime = [[${numT}]];
+    var numTime = [[${numT2}]];
     var option = {
         title:{
             text:'平均骑行时间分布',
@@ -413,7 +408,7 @@
 
 
 <script type="text/javascript">
-    var numCost = [[${numC}]]
+    var numCost = [[${numC2}]]
     var option = {
         tooltip: {
             trigger: 'axis',
@@ -459,7 +454,7 @@
 </script>
 
 <script type="text/javascript">
-    var numRide = [[${numR}]];
+    var numRide = [[${numR2}]];
     var option = {
         tooltip: {
             trigger: 'item',
@@ -496,7 +491,7 @@
 
     <script type="text/javascript">
         window.onload=function(){
-            document.getElementById("button1").style.background="#24c2ce";
+            document.getElementById("button2").style.background="#24c2ce";
         }
     </script>
 
@@ -505,13 +500,12 @@
 
             document.getElementById("button1").style.background="#24c2ce";
             document.getElementById("button2").style.background="#D3D3D3";
-
+            window.location.href="newold.html";
         }
 
         function change2() {
             document.getElementById("button1").style.background="#D3D3D3";
             document.getElementById("button2").style.background="#24c2ce";
-            window.location.href="newold2.html";
         }
     </script>
 
